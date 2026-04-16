@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Love and Loops — Handmade Hope, Loop by Loop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,500;1,400&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #fdf6ec;
+    --warm-white: #fffbf4;
+    --terracotta: #c4704a;
+    --terracotta-light: #e8916d;
+    --sage: #7a9e7e;
+    --sage-light: #a8c5ac;
+    --dusty-rose: #d4a0a0;
+    --golden: #d4a843;
+    --brown-dark: #3d2c1e;
+    --brown-mid: #6b4c35;
+    --text: #2e1f12;
+    --text-light: #7a5c3e;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Lora', Georgia, serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='4' height='4' fill='%23fdf6ec'/%3E%3Ccircle cx='1' cy='1' r='0.5' fill='%23d4a84322'/%3E%3Ccircle cx='3' cy='3' r='0.5' fill='%23c4704a11'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 3rem;
+    background: rgba(253,246,236,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1.5px solid #e8d5c0;
+  }
+
+  .nav-logo {
+    font-family: 'Caveat', cursive;
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: var(--terracotta);
+    letter-spacing: 0.02em;
+  }
+
+  .nav-logo span { color: var(--sage); }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'Lora', serif;
+    font-size: 0.9rem;
+    color: var(--brown-mid);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--terracotta); }
+
+  .nav-cta {
+    background: var(--terracotta);
+    color: white !important;
+    padding: 0.55rem 1.4rem;
+    border-radius: 50px;
+    transition: background 0.2s !important;
+  }
+
+  .nav-cta:hover { background: var(--terracotta-light) !important; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 7rem 3rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg-yarn {
+    position: absolute;
+    right: -60px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 580px;
+    height: 580px;
+    opacity: 0.12;
+  }
+
+  .hero-squiggle {
+    position: absolute;
+    bottom: 40px;
+    left: 0;
+    right: 0;
+    height: 40px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 40'%3E%3Cpath d='M0,20 C180,0 360,40 540,20 C720,0 900,40 1080,20 C1260,0 1380,40 1440,20' fill='none' stroke='%23c4704a' stroke-width='2' opacity='0.3'/%3E%3C/svg%3E") repeat-x;
+  }
+
+  .hero-content {
+    max-width: 680px;
+    position: relative;
+    z-index: 1;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-eyebrow {
+    font-family: 'Caveat', cursive;
+    font-size: 1.2rem;
+    color: var(--sage);
+    letter-spacing: 0.08em;
+    margin-bottom: 0.8rem;
+    animation: fadeUp 1s 0.1s ease both;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(3rem, 6vw, 5rem);
+    line-height: 1.1;
+    color: var(--brown-dark);
+    margin-bottom: 1.2rem;
+    animation: fadeUp 1s 0.2s ease both;
+  }
+
+  .hero h1 em { font-style: italic; color: var(--terracotta); }
+
+  .hero-tagline {
+    font-family: 'Caveat', cursive;
+    font-size: 1.5rem;
+    color: var(--text-light);
+    margin-bottom: 1.8rem;
+    animation: fadeUp 1s 0.3s ease both;
+  }
+
+  .hero p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--brown-mid);
+    max-width: 520px;
+    margin-bottom: 2.5rem;
+    animation: fadeUp 1s 0.4s ease both;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    animation: fadeUp 1s 0.5s ease both;
+  }
+
+  .btn-primary {
+    background: var(--terracotta);
+    color: white;
+    padding: 0.85rem 2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-family: 'Lora', serif;
+    font-size: 0.95rem;
+    letter-spacing: 0.03em;
+    transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+    box-shadow: 0 4px 20px rgba(196,112,74,0.3);
+    display: inline-block;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(196,112,74,0.4);
+    background: var(--terracotta-light);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--sage);
+    padding: 0.85rem 2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-family: 'Lora', serif;
+    font-size: 0.95rem;
+    border: 2px solid var(--sage);
+    transition: transform 0.2s, background 0.2s, color 0.2s;
+    display: inline-block;
+  }
+
+  .btn-secondary:hover {
+    background: var(--sage);
+    color: white;
+    transform: translateY(-2px);
+  }
+
+  /* TICKER */
+  .ticker-wrap {
+    background: var(--terracotta);
+    overflow: hidden;
+    padding: 0.7rem 0;
+  }
+
+  .ticker {
+    display: flex;
+    gap: 3rem;
+    animation: ticker 28s linear infinite;
+    white-space: nowrap;
+  }
+
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  .ticker-item {
+    font-family: 'Caveat', cursive;
+    font-size: 1.05rem;
+    color: white;
+    letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-shrink: 0;
+  }
+
+  .ticker-item::before { content: '🧶'; font-size: 0.9rem; }
+
+  /* STATS */
+  .stats-bar {
+    background: var(--brown-dark);
+    color: var(--cream);
+    padding: 1.4rem 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4rem;
+    flex-wrap: wrap;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stats-bar::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(255,255,255,0.02) 20px, rgba(255,255,255,0.02) 40px);
+  }
+
+  .stat-item { text-align: center; position: relative; z-index: 1; }
+
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem;
+    color: var(--golden);
+    display: block;
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-family: 'Caveat', cursive;
+    font-size: 1rem;
+    color: var(--sage-light);
+    letter-spacing: 0.06em;
+    margin-top: 0.3rem;
+  }
+
+  .stat-divider { width: 1px; height: 40px; background: rgba(255,255,255,0.15); }
+
+  /* ABOUT */
+  .about {
+    padding: 6rem 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .about-card {
+    background: var(--warm-white);
+    border-radius: 20px;
+    padding: 3rem;
+    border: 2px solid #e8d5c0;
+    position: relative;
+    box-shadow: 8px 8px 0px var(--terracotta), 12px 12px 0px rgba(196,112,74,0.15);
+  }
+
+  .about-card-label { font-family: 'Caveat', cursive; font-size: 1rem; color: var(--terracotta); letter-spacing: 0.08em; margin-bottom: 0.5rem; }
+  .founder-quote { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-style: italic; line-height: 1.6; color: var(--brown-dark); margin-bottom: 1.5rem; }
+  .founder-name { font-family: 'Caveat', cursive; font-size: 1.1rem; color: var(--text-light); }
+
+  .floating-tag {
+    position: absolute;
+    font-family: 'Caveat', cursive;
+    font-size: 0.95rem;
+    padding: 0.5rem 1.2rem;
+    border-radius: 50px;
+    color: white;
+  }
+
+  .floating-tag.top { top: -18px; right: 30px; background: var(--sage); transform: rotate(-3deg); }
+  .floating-tag.bottom { bottom: -18px; left: 30px; background: var(--golden); color: var(--brown-dark); transform: rotate(2deg); }
+
+  .about-text h2 { font-family: 'Playfair Display', serif; font-size: 2.6rem; line-height: 1.2; color: var(--brown-dark); margin-bottom: 1.5rem; }
+  .about-text h2 em { font-style: italic; color: var(--terracotta); }
+  .about-text p { font-size: 1rem; line-height: 1.9; color: var(--brown-mid); margin-bottom: 1.2rem; }
+
+  /* ITEMS */
+  .items-section {
+    background: var(--brown-dark);
+    padding: 6rem 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .items-section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 60px;
+    background: var(--cream);
+    clip-path: ellipse(55% 100% at 50% 0%);
+  }
+
+  .items-section::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 60px;
+    background: var(--cream);
+    clip-path: ellipse(55% 100% at 50% 100%);
+  }
+
+  .items-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+
+  .section-header { text-align: center; margin-bottom: 3.5rem; }
+
+  .section-eyebrow {
+    font-family: 'Caveat', cursive;
+    font-size: 1.1rem;
+    letter-spacing: 0.1em;
+    display: block;
+    margin-bottom: 0.6rem;
+  }
+
+  .section-header h2 { font-family: 'Playfair Display', serif; font-size: 2.6rem; line-height: 1.2; }
+
+  .items-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+
+  .item-card {
+    background: rgba(255,255,255,0.06);
+    border: 1.5px solid rgba(255,255,255,0.12);
+    border-radius: 16px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    transition: transform 0.3s, background 0.3s;
+  }
+
+  .item-card:hover { transform: translateY(-6px); background: rgba(255,255,255,0.1); }
+
+  .item-emoji { font-size: 3rem; display: block; margin-bottom: 1rem; }
+  .item-name { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--cream); margin-bottom: 0.6rem; }
+  .item-desc { font-size: 0.88rem; color: rgba(253,246,236,0.6); line-height: 1.7; }
+  .item-tag { display: inline-block; margin-top: 1rem; background: rgba(196,112,74,0.3); color: var(--terracotta-light); font-family: 'Caveat', cursive; font-size: 0.85rem; padding: 0.25rem 0.8rem; border-radius: 20px; }
+
+  /* MAP SECTION */
+  .map-section {
+    padding: 6rem 3rem;
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+
+  .map-header { text-align: center; margin-bottom: 3rem; }
+  .map-header .section-eyebrow { color: var(--terracotta); }
+  .map-header h2 { font-family: 'Playfair Display', serif; font-size: 2.6rem; color: var(--brown-dark); }
+
+  .map-layout {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 2rem;
+    align-items: start;
+  }
+
+  .map-visual {
+    background: var(--warm-white);
+    border-radius: 20px;
+    border: 2px solid #e8d5c0;
+    padding: 1.5rem;
+    position: relative;
+  }
+
+  /* World map SVG */
+  .world-map-container {
+    position: relative;
+    width: 100%;
+  }
+
+  .world-map-container svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .map-tooltip {
+    position: absolute;
+    background: white;
+    border: 1.5px solid #e8d5c0;
+    border-radius: 10px;
+    padding: 0.6rem 1rem;
+    font-family: 'Caveat', cursive;
+    font-size: 0.9rem;
+    color: var(--brown-dark);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    pointer-events: none;
+    white-space: nowrap;
+    display: none;
+    z-index: 10;
+  }
+
+  .map-legend {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1rem;
+    padding-top: 0.8rem;
+    border-top: 1px solid #e8d5c0;
+    flex-wrap: wrap;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Caveat', cursive;
+    font-size: 0.9rem;
+    color: var(--text-light);
+  }
+
+  .legend-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* Needs panel */
+  .needs-panel { display: flex; flex-direction: column; gap: 1rem; }
+
+  .needs-panel h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--brown-dark); margin-bottom: 0.2rem; }
+  .needs-panel .sub { font-size: 0.85rem; color: var(--text-light); font-style: italic; margin-bottom: 0.8rem; }
+
+  .needs-card {
+    background: var(--warm-white);
+    border: 2px solid #e8d5c0;
+    border-radius: 16px;
+    padding: 1.2rem;
+    transition: border-color 0.2s;
+  }
+
+  .needs-card:hover { border-color: var(--terracotta); }
+
+  .needs-location { font-family: 'Caveat', cursive; font-size: 0.95rem; color: var(--terracotta); margin-bottom: 0.2rem; }
+  .needs-type { font-family: 'Playfair Display', serif; font-size: 0.95rem; color: var(--brown-dark); margin-bottom: 0.5rem; }
+
+  .needs-items { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+
+  .need-tag {
+    background: var(--cream);
+    border: 1px solid #e0cdb8;
+    color: var(--text-light);
+    font-family: 'Caveat', cursive;
+    font-size: 0.8rem;
+    padding: 0.15rem 0.6rem;
+    border-radius: 20px;
+  }
+
+  .urgent-tag { background: rgba(196,112,74,0.12); border-color: var(--terracotta); color: var(--terracotta); }
+
+  /* INSTAGRAM SECTION */
+  .instagram-section {
+    padding: 5rem 3rem;
+    background: var(--warm-white);
+    border-top: 2px solid #e8d5c0;
+    border-bottom: 2px solid #e8d5c0;
+  }
+
+  .instagram-inner { max-width: 1200px; margin: 0 auto; }
+
+  .instagram-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .instagram-title-group {}
+
+  .instagram-title-group .section-eyebrow { color: var(--terracotta); text-align: left; }
+
+  .instagram-title-group h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    color: var(--brown-dark);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .instagram-handle-link {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    color: white;
+    padding: 0.7rem 1.4rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-family: 'Caveat', cursive;
+    font-size: 1.1rem;
+    transition: transform 0.2s, opacity 0.2s;
+    box-shadow: 0 4px 16px rgba(220,39,67,0.3);
+    flex-shrink: 0;
+  }
+
+  .instagram-handle-link:hover { transform: translateY(-2px); opacity: 0.92; }
+
+  .insta-icon {
+    width: 22px;
+    height: 22px;
+    fill: white;
+  }
+
+  /* Instagram grid */
+  .instagram-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0.8rem;
+  }
+
+  .insta-post {
+    aspect-ratio: 1;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    background: #f0e8dc;
+  }
+
+  .insta-post:nth-child(1) { grid-column: span 2; grid-row: span 2; border-radius: 16px; }
+
+  .insta-post-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .insta-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-family: 'Caveat', cursive;
+    font-size: 0.85rem;
+    color: var(--text-light);
+    text-align: center;
+    padding: 0.5rem;
+  }
+
+  /* Each post has a different warm background */
+  .insta-post:nth-child(1) .insta-placeholder { background: linear-gradient(135deg, #f5e6d3, #e8c9a8); font-size: 1rem; }
+  .insta-post:nth-child(2) .insta-placeholder { background: linear-gradient(135deg, #dcebd8, #c4d9bf); }
+  .insta-post:nth-child(3) .insta-placeholder { background: linear-gradient(135deg, #f0ddd0, #e2c4b0); }
+  .insta-post:nth-child(4) .insta-placeholder { background: linear-gradient(135deg, #e8d5d5, #d4b8b8); }
+  .insta-post:nth-child(5) .insta-placeholder { background: linear-gradient(135deg, #f5edd0, #e8d490); }
+  .insta-post:nth-child(6) .insta-placeholder { background: linear-gradient(135deg, #d8e8dc, #b8d0bf); }
+  .insta-post:nth-child(7) .insta-placeholder { background: linear-gradient(135deg, #f0e0d8, #e0c4b4); }
+  .insta-post:nth-child(8) .insta-placeholder { background: linear-gradient(135deg, #dde8dd, #c0d4c0); }
+
+  .insta-post-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(61,44,30,0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s;
+    opacity: 0;
+  }
+
+  .insta-post:hover .insta-post-overlay {
+    background: rgba(61,44,30,0.5);
+    opacity: 1;
+  }
+
+  .insta-post-overlay span {
+    font-family: 'Caveat', cursive;
+    color: white;
+    font-size: 0.95rem;
+  }
+
+  .insta-emoji { font-size: 2rem; }
+  .insta-big-emoji { font-size: 3.5rem; }
+
+  .instagram-note {
+    margin-top: 1.8rem;
+    text-align: center;
+    font-size: 0.88rem;
+    color: var(--text-light);
+    font-style: italic;
+  }
+
+  /* HOW TO HELP */
+  .help-section {
+    background: linear-gradient(135deg, var(--sage) 0%, #5d8c61 100%);
+    padding: 6rem 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .help-section::before {
+    content: '';
+    position: absolute;
+    top: -40px; left: -40px;
+    width: 300px; height: 300px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 50%;
+  }
+
+  .help-section::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; right: -60px;
+    width: 400px; height: 400px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 50%;
+  }
+
+  .help-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+  .help-section .section-eyebrow { color: rgba(255,255,255,0.7); }
+  .help-section .section-header h2 { color: white; }
+
+  .help-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; }
+
+  .help-card {
+    background: rgba(255,255,255,0.12);
+    border: 1.5px solid rgba(255,255,255,0.2);
+    border-radius: 20px;
+    padding: 2.2rem;
+    text-align: center;
+    backdrop-filter: blur(4px);
+    transition: transform 0.3s, background 0.3s;
+  }
+
+  .help-card:hover { transform: translateY(-4px); background: rgba(255,255,255,0.18); }
+
+  .help-step { font-family: 'Caveat', cursive; font-size: 3rem; color: rgba(255,255,255,0.25); display: block; line-height: 1; margin-bottom: 0.5rem; }
+  .help-icon { font-size: 2.5rem; display: block; margin-bottom: 1rem; }
+  .help-card h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: white; margin-bottom: 0.8rem; }
+  .help-card p { font-size: 0.9rem; color: rgba(255,255,255,0.75); line-height: 1.7; }
+
+  .help-cta { text-align: center; margin-top: 3rem; }
+
+  .btn-white {
+    background: white;
+    color: var(--sage);
+    padding: 0.9rem 2.4rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-family: 'Lora', serif;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    display: inline-block;
+  }
+
+  .btn-white:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(0,0,0,0.2); }
+
+  /* FOOTER */
+  footer {
+    background: var(--brown-dark);
+    color: var(--cream);
+    padding: 3rem;
+    text-align: center;
+  }
+
+  .footer-logo { font-family: 'Caveat', cursive; font-size: 2rem; color: var(--terracotta-light); margin-bottom: 0.5rem; }
+  .footer-tagline { font-family: 'Lora', serif; font-style: italic; color: rgba(253,246,236,0.5); font-size: 0.95rem; margin-bottom: 2rem; }
+  .footer-links { display: flex; gap: 2rem; justify-content: center; list-style: none; margin-bottom: 2rem; flex-wrap: wrap; }
+  .footer-links a { color: rgba(253,246,236,0.6); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--terracotta-light); }
+  .footer-credit { font-size: 0.8rem; color: rgba(253,246,236,0.3); }
+
+  /* Pin animations */
+  @keyframes pinPulse {
+    0%, 100% { r: 5; opacity: 0.8; }
+    50% { r: 10; opacity: 0; }
+  }
+
+  .pin-pulse {
+    animation: svgPulse 2s ease-out infinite;
+    transform-origin: center;
+  }
+
+  @keyframes svgPulse {
+    0% { r: 6; opacity: 0.6; }
+    100% { r: 22; opacity: 0; }
+  }
+
+  @media (max-width: 1000px) {
+    .map-layout { grid-template-columns: 1fr; }
+    .instagram-grid { grid-template-columns: repeat(4, 1fr); }
+    .insta-post:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+    .items-grid { grid-template-columns: repeat(2, 1fr); }
+    .about { grid-template-columns: 1fr; gap: 3rem; padding: 4rem 1.5rem; }
+    .help-grid { grid-template-columns: 1fr; }
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { padding: 5rem 1.5rem 3rem; }
+    .map-section, .instagram-section, .help-section { padding: 4rem 1.5rem; }
+    .items-section { padding: 5rem 1.5rem; }
+    .stats-bar { gap: 2rem; padding: 1.5rem; }
+  }
+
+  @media (max-width: 600px) {
+    .instagram-grid { grid-template-columns: repeat(3, 1fr); }
+    .insta-post:nth-child(1) { grid-column: span 1; grid-row: span 1; }
+    .items-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Love <span>&</span> Loops</div>
+  <ul class="nav-links">
+    <li><a href="#about">Our Story</a></li>
+    <li><a href="#items">What We Make</a></li>
+    <li><a href="#map">Where We Go</a></li>
+    <li><a href="#instagram">Gallery</a></li>
+    <li><a href="#help" class="nav-cta">Donate Items</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <svg class="hero-bg-yarn" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="200" cy="200" r="180" stroke="#c4704a" stroke-width="3"/>
+    <circle cx="200" cy="200" r="140" stroke="#c4704a" stroke-width="2"/>
+    <circle cx="200" cy="200" r="100" stroke="#c4704a" stroke-width="2"/>
+    <circle cx="200" cy="200" r="60" stroke="#c4704a" stroke-width="2"/>
+    <path d="M80 200 Q150 100 200 200 Q250 300 320 200" stroke="#7a9e7e" stroke-width="2.5" fill="none"/>
+    <path d="M60 160 Q140 80 200 160 Q260 240 340 160" stroke="#d4a843" stroke-width="2" fill="none" opacity="0.7"/>
+    <path d="M100 250 Q170 150 220 250 Q270 350 350 250" stroke="#d4a0a0" stroke-width="2" fill="none" opacity="0.5"/>
+    <circle cx="200" cy="200" r="25" fill="#c4704a" opacity="0.4"/>
+  </svg>
+  <div class="hero-content">
+    <p class="hero-eyebrow">✦ Founded by Alaya, age 16 ✦</p>
+    <h1>Handmade <em>love</em>,<br>delivered worldwide</h1>
+    <p class="hero-tagline">handmade hope, loop by loop</p>
+    <p>Love and Loops delivers handmade crocheted and knitted blankets, hats, toys, and bags to children in hospitals and orphanages — starting in Sri Lanka, spreading to the world.</p>
+    <div class="hero-buttons">
+      <a href="#help" class="btn-primary">Donate Handmade Items</a>
+      <a href="#about" class="btn-secondary">Our Story</a>
+    </div>
+  </div>
+  <div class="hero-squiggle"></div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span class="ticker-item">47 blankets donated this month</span>
+    <span class="ticker-item">New delivery: Colombo Children's Hospital, Sri Lanka</span>
+    <span class="ticker-item">23 hats sent to Jaffna Orphanage</span>
+    <span class="ticker-item">Urgent need: warm blankets, Kandy region</span>
+    <span class="ticker-item">12 volunteers crafting this week</span>
+    <span class="ticker-item">218 items delivered since launch</span>
+    <span class="ticker-item">47 blankets donated this month</span>
+    <span class="ticker-item">New delivery: Colombo Children's Hospital, Sri Lanka</span>
+    <span class="ticker-item">23 hats sent to Jaffna Orphanage</span>
+    <span class="ticker-item">Urgent need: warm blankets, Kandy region</span>
+    <span class="ticker-item">12 volunteers crafting this week</span>
+    <span class="ticker-item">218 items delivered since launch</span>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <span class="stat-number" id="counter1">0</span>
+    <span class="stat-label">Items Donated</span>
+  </div>
+  <div class="stat-divider"></div>
+  <div class="stat-item">
+    <span class="stat-number" id="counter2">0</span>
+    <span class="stat-label">Children Reached</span>
+  </div>
+  <div class="stat-divider"></div>
+  <div class="stat-item">
+    <span class="stat-number" id="counter3">0</span>
+    <span class="stat-label">Locations</span>
+  </div>
+  <div class="stat-divider"></div>
+  <div class="stat-item">
+    <span class="stat-number" id="counter4">0</span>
+    <span class="stat-label">Volunteer Makers</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-visual">
+    <div class="about-card">
+      <div class="floating-tag top">🧶 Founded 2024</div>
+      <div class="about-card-label">From the founder</div>
+      <p class="founder-quote">"Every child deserves to know they are loved. I started looping hope, one stitch at a time — and I hope you'll join me."</p>
+      <p class="founder-name">— Alaya, Founder &amp; Chief Loop Officer</p>
+      <div class="floating-tag bottom">🌍 Starting in Sri Lanka</div>
+    </div>
+  </div>
+  <div class="about-text">
+    <h2>Every child deserves to feel <em>loved</em></h2>
+    <p>Love and Loops was founded by Alaya at just 16 years old, driven by a simple but powerful belief: that a handmade blanket or toy carries something no factory can replicate — the warmth of human hands and the intention behind every loop.</p>
+    <p>We began by connecting with hospitals and orphanages in villages across Sri Lanka, bringing crocheted and knitted items made by friends, family, and volunteers from around the world.</p>
+    <p>Each item is handmade with care, tagged with love, and delivered to children who deserve to feel seen and cherished.</p>
+    <a href="#help" class="btn-primary" style="margin-top:1rem;">Join Our Circle of Makers</a>
+  </div>
+</section>
+
+<!-- ITEMS -->
+<section class="items-section" id="items">
+  <div class="items-inner">
+    <div class="section-header">
+      <span class="section-eyebrow" style="color:var(--sage-light)">made with love</span>
+      <h2 style="color:var(--cream)">What We Make &amp; Send</h2>
+    </div>
+    <div class="items-grid">
+      <div class="item-card">
+        <span class="item-emoji">🛏️</span>
+        <p class="item-name">Blankets</p>
+        <p class="item-desc">Crocheted and knitted in soft, warm yarns. Perfect for tiny hands to hold onto.</p>
+        <span class="item-tag">Most Needed</span>
+      </div>
+      <div class="item-card">
+        <span class="item-emoji">🧢</span>
+        <p class="item-name">Hats</p>
+        <p class="item-desc">Cozy beanies and bonnets for newborns to toddlers. Especially needed in highland regions.</p>
+        <span class="item-tag">All Ages</span>
+      </div>
+      <div class="item-card">
+        <span class="item-emoji">🧸</span>
+        <p class="item-name">Toys</p>
+        <p class="item-desc">Amigurumi animals and stuffed companions. A friend to hold in a hospital bed or crib.</p>
+        <span class="item-tag">Children's Favourite</span>
+      </div>
+      <div class="item-card">
+        <span class="item-emoji">👜</span>
+        <p class="item-name">Bags</p>
+        <p class="item-desc">Small tote bags for children's belongings — a sense of ownership and dignity.</p>
+        <span class="item-tag">Practical &amp; Loved</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAP -->
+<section class="map-section" id="map">
+  <div class="map-header">
+    <span class="section-eyebrow">where hope travels</span>
+    <h2>Where Our Items Go</h2>
+  </div>
+  <div class="map-layout">
+    <div class="map-visual">
+      <div class="world-map-container" id="mapContainer">
+        <!-- Accurate world map SVG with proper continent outlines -->
+        <svg id="worldMap" viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg">
+          <!-- Ocean -->
+          <rect width="1000" height="500" fill="#d8edf5" rx="12"/>
+
+          <!-- Greenland -->
+          <path d="M270 30 L310 20 L350 35 L360 60 L340 90 L310 100 L280 85 L260 60 Z" fill="#c8dbc0" stroke="#aec9a6" stroke-width="0.8"/>
+
+          <!-- North America -->
+          <path d="M60 80 L120 65 L170 70 L210 85 L230 110 L245 140 L240 170 L220 200 L200 220 L185 250 L170 270 L155 260 L140 240 L120 230 L100 210 L85 185 L70 160 L55 130 L50 100 Z" fill="#c8dbc0" stroke="#aec9a6" stroke-width="0.8"/>
+
+          <!-- Central America -->
+          <path d="M170 270 L185 265 L195 280 L188 295 L175 295 L168 283 Z" fill="#c8dbc0" stroke="#aec9a6" stroke-width="0.8"/>
+
+          <!-- Caribbean islands (simplified) -->
+          <ellipse cx="210" cy="250" rx="8" ry="4" fill="#c8dbc0"/>
+          <ellipse cx="225" cy="258" rx="5" ry="3" fill="#c8dbc0"/>
+
+          <!-- South America -->
+          <path d="M180 300 L230 285 L265 295 L290 320 L300 360 L295 400 L275 440 L250 460 L225 455 L200 430 L185 400 L175 360 L170 330 Z" fill="#c8dbc0" stroke="#aec9a6" stroke-width="0.8"/>
+
+          <!-- UK/Ireland -->
+          <ellipse cx="388" cy="110" rx="8" ry="12" fill="#c8dbc0"/>
+          <ellipse cx="378" cy="112" rx="5" ry="8" fill="#c8dbc0"/>
+
+          <!-- Iceland -->
+          <ellipse cx="320" cy="75" rx="16" ry="10" fill="#c8dbc0"/>
+
+          <!-- Europe -->
+          <path d="M390 105 L440 95 L470 100 L490 115 L495 135 L480 155 L460 165 L430 160 L410 150 L395 135 Z" fill="#c8dbc0" stroke="#aec9a6" stroke-width="0.8"/>
+
+          <!-- Iberian Peninsula -->
+          <path d="M390 150 L420 145 L430 165 L420 185 L400 185 L388 170 Z" fill="#c8dbc0" stroke="#aec9a6" stroke-width="0.8"/>
+
+          <!-- Italy (boot shape simplified) -->
+          <path d="M455 145 L470 150 L475 175 L465 200 L458 205 L452 195 L450 170 L448 155 Z" fill="#c8dbc0" stroke="#aec9a6" stroke-width="0.8"/>
+
+          <!-- Scandinavia -->
+          <path d="M430 65 L460 55 L475 70 L470 100 L450 110 L435 100 L428 82 Z" fill="#c8dbc0" stroke="#aec9a6" stroke-width="0.8"/>
+
+          <!-- Africa -->
+          <path d="M400 175 L450 165 L490 175 L510 200 L520 240 L520 290 L510 340 L495 380 L475 410 L450 425 L425 420 L400 405 L382 375 L374 335 L374 285 L380 235 L388 200 Z" fill="#c8dbc0" stroke="#aec9a6" stroke-width="0.8"/>
+
+          <!-- Madagascar -->
+          <ellipse cx="545" cy="350" rx="10" ry="22" fill="#c8dbc0" transform="rotate(-20 545 350)"/>
+
+          <!-- Middle East / Arabian Peninsula -->
+          <path d="M495 155 L540 150 L565 170 L570 200 L555 220 L530 225 L510 215 L498 195 Z" fill="#c8dbc0" stroke="#aec9a6" stroke-width="0.8"/>
+
+          <!-- Russia / Central Asia (large landmass) -->
+          <path d="M480 55 L560 40 L650 35 L730 40 L790 55 L820 75 L810 100 L780 115 L740 120 L700 115 L660 120 L620 115 L580 120 L550 115 L520 120 L500 110 L482 90 Z" fill="#c8dbc0" stroke="#aec9a6" stroke-width="0.8"/>
+
+          <!-- South Asia / India -->
+          <path d="M570 175 L620 165 L650 175 L660 200 L655 230 L640 260 L620 275 L605 265 L590 240 L578 210 Z" fill="#c8dbc0" stroke="#aec9a6" stroke-width="0.8"/>
+
+          <!-- Sri Lanka - ACTIVE LOCATION (highlighted) -->
+          <ellipse cx="643" cy="285" rx="8" ry="10" fill="#c4704a" opacity="0.85"/>
+
+          <!-- Southeast Asia mainland -->
+          <path d="M660 155 L700 150 L720 165 L715 190 L700 205 L685 200 L668 185 Z" fill="#c8dbc0" stroke="#aec9a6" stroke-width="0.8"/>
+
+          <!-- Southeast Asia islands (Indonesia etc.) -->
+          <ellipse cx="720" cy="230" rx="20" ry="8" fill="#c8dbc0"/>
+          <ellipse cx="760" cy="240" rx="18" ry="7" fill="#c8dbc0"/>
+          <ellipse cx="748" cy="260" rx="12" ry="6" fill="#c8dbc0"/>
+          <ellipse cx="690" cy="245" rx="10" ry="5" fill="#c8dbc0"/>
+          <ellipse cx="795" cy="255" rx="8" ry="5" fill="#c8dbc0"/>
+
+          <!-- Philippines -->
+          <ellipse cx="745" cy="200" rx="7" ry="14" fill="#c8dbc0"/>
+
+          <!-- China / East Asia -->
+          <path d="M660 100 L730 85 L780 90 L800 115 L790 145 L760 155 L720 150 L685 145 L665 130 Z" fill="#c8dbc0" stroke="#aec9a6" stroke-width="0.8"/>
+
+          <!-- Japan -->
+          <ellipse cx="810" cy="120" rx="8" ry="20" fill="#c8dbc0" transform="rotate(20 810 120)"/>
+          <ellipse cx="820" cy="108" rx="5" ry="10" fill="#c8dbc0" transform="rotate(20 820 108)"/>
+
+          <!-- Australia -->
+          <path d="M740 320 L810 305 L855 315 L875 345 L870 385 L845 410 L800 420 L755 410 L730 385 L725 350 Z" fill="#c8dbc0" stroke="#aec9a6" stroke-width="0.8"/>
+
+          <!-- New Zealand -->
+          <ellipse cx="900" cy="400" rx="8" ry="18" fill="#c8dbc0" transform="rotate(15 900 400)"/>
+          <ellipse cx="912" cy="382" rx="6" ry="12" fill="#c8dbc0" transform="rotate(10 912 382)"/>
+
+          <!-- Papua New Guinea -->
+          <ellipse cx="815" cy="285" rx="22" ry="12" fill="#c8dbc0"/>
+
+          <!-- Sri Lanka ACTIVE PIN - on top -->
+          <!-- Ripple 1 -->
+          <circle cx="643" cy="282" r="6" fill="none" stroke="#c4704a" stroke-width="2" opacity="0.7">
+            <animate attributeName="r" values="6;22" dur="2s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0.7;0" dur="2s" repeatCount="indefinite"/>
+          </circle>
+          <!-- Ripple 2 (offset) -->
+          <circle cx="643" cy="282" r="6" fill="none" stroke="#c4704a" stroke-width="1.5" opacity="0.5">
+            <animate attributeName="r" values="6;22" dur="2s" begin="0.7s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0.5;0" dur="2s" begin="0.7s" repeatCount="indefinite"/>
+          </circle>
+          <!-- Pin dot -->
+          <circle cx="643" cy="282" r="6" fill="#c4704a" stroke="white" stroke-width="2"/>
+
+          <!-- Pin label -->
+          <rect x="648" y="268" width="88" height="22" rx="6" fill="white" opacity="0.95"/>
+          <text x="654" y="283" font-family="'Caveat', cursive" font-size="11" fill="#3d2c1e">📍 Sri Lanka</text>
+        </svg>
+
+        <!-- Tooltip -->
+        <div class="map-tooltip" id="mapTooltip"></div>
+      </div>
+
+      <!-- Legend -->
+      <div class="map-legend">
+        <div class="legend-item">
+          <div class="legend-dot" style="background:#c4704a;"></div>
+          Active delivery location
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background:#d4a843; opacity:0.7;"></div>
+          Coming soon
+        </div>
+      </div>
+    </div>
+
+    <!-- Needs Panel -->
+    <div class="needs-panel">
+      <h3>Current Shelter Needs</h3>
+      <p class="sub">Updated as shelters share their requests</p>
+
+      <div class="needs-card">
+        <div class="needs-location">📍 Colombo Children's Hospital</div>
+        <div class="needs-type">Hospital, Western Province · Sri Lanka</div>
+        <div class="needs-items">
+          <span class="need-tag urgent-tag">🚨 Blankets</span>
+          <span class="need-tag">Hats — newborn</span>
+          <span class="need-tag">Toys</span>
+        </div>
+      </div>
+
+      <div class="needs-card">
+        <div class="needs-location">📍 Jaffna Children's Home</div>
+        <div class="needs-type">Orphanage, Northern Province · Sri Lanka</div>
+        <div class="needs-items">
+          <span class="need-tag">Blankets — toddler</span>
+          <span class="need-tag urgent-tag">🚨 Warm hats</span>
+          <span class="need-tag">Bags</span>
+        </div>
+      </div>
+
+      <div class="needs-card">
+        <div class="needs-location">📍 Kandy Orphanage Village</div>
+        <div class="needs-type">Orphanage, Central Province · Sri Lanka</div>
+        <div class="needs-items">
+          <span class="need-tag">Toys — amigurumi</span>
+          <span class="need-tag">Blankets</span>
+          <span class="need-tag urgent-tag">🚨 Bags</span>
+        </div>
+      </div>
+
+      <a href="#help" class="btn-primary" style="text-align:center;">Make Items for These Shelters</a>
+    </div>
+  </div>
+</section>
+
+<!-- INSTAGRAM GALLERY -->
+<section class="instagram-section" id="instagram">
+  <div class="instagram-inner">
+    <div class="instagram-header">
+      <div class="instagram-title-group">
+        <span class="section-eyebrow">from our community</span>
+        <h2>
+          <svg class="insta-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          @projectloveandloops
+        </h2>
+      </div>
+      <a href="https://instagram.com/projectloveandloops" target="_blank" class="instagram-handle-link">
+        <svg class="insta-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        Follow @projectloveandloops
+      </a>
+    </div>
+
+    <!-- 
+      LIVE INSTAGRAM FEED NOTE:
+      On the live site, replace this grid with the Instagram Basic Display API feed.
+      Steps:
+        1. Create a Facebook Developer App at developers.facebook.com
+        2. Add Instagram Basic Display product
+        3. Generate a long-lived access token for @projectloveandloops
+        4. Fetch: https://graph.instagram.com/me/media?fields=id,caption,media_url,thumbnail_url,permalink,media_type&access_token=YOUR_TOKEN
+        5. Map the returned media array to <a href="{permalink}"><img src="{media_url}"></a>
+      
+      Alternatively, embed a free widget from Elfsight or Behold.so for a no-code solution.
+      The grid below is a pixel-perfect visual stand-in showing exactly how it will look.
+    -->
+    <div class="instagram-grid" id="instagramGrid">
+      <!-- Post 1 - large featured -->
+      <div class="insta-post">
+        <div class="insta-post-inner">
+          <div class="insta-placeholder">
+            <span class="insta-big-emoji">🛏️</span>
+            <span>Freshly finished blanket ready to go!</span>
+            <span style="font-size:0.7rem;opacity:0.6">loveandloops</span>
+          </div>
+          <div class="insta-post-overlay"><span>View on Instagram ↗</span></div>
+        </div>
+      </div>
+      <!-- Post 2 -->
+      <div class="insta-post">
+        <div class="insta-post-inner">
+          <div class="insta-placeholder">
+            <span class="insta-emoji">🧶</span>
+            <span>Yarn haul day!</span>
+          </div>
+          <div class="insta-post-overlay"><span>View ↗</span></div>
+        </div>
+      </div>
+      <!-- Post 3 -->
+      <div class="insta-post">
+        <div class="insta-post-inner">
+          <div class="insta-placeholder">
+            <span class="insta-emoji">🧸</span>
+            <span>New amigurumi family</span>
+          </div>
+          <div class="insta-post-overlay"><span>View ↗</span></div>
+        </div>
+      </div>
+      <!-- Post 4 -->
+      <div class="insta-post">
+        <div class="insta-post-inner">
+          <div class="insta-placeholder">
+            <span class="insta-emoji">📦</span>
+            <span>Packing up for Colombo!</span>
+          </div>
+          <div class="insta-post-overlay"><span>View ↗</span></div>
+        </div>
+      </div>
+      <!-- Post 5 -->
+      <div class="insta-post">
+        <div class="insta-post-inner">
+          <div class="insta-placeholder">
+            <span class="insta-emoji">🧢</span>
+            <span>Tiny hats, big love</span>
+          </div>
+          <div class="insta-post-overlay"><span>View ↗</span></div>
+        </div>
+      </div>
+      <!-- Post 6 -->
+      <div class="insta-post">
+        <div class="insta-post-inner">
+          <div class="insta-placeholder">
+            <span class="insta-emoji">💛</span>
+            <span>Maker meetup!</span>
+          </div>
+          <div class="insta-post-overlay"><span>View ↗</span></div>
+        </div>
+      </div>
+      <!-- Post 7 -->
+      <div class="insta-post">
+        <div class="insta-post-inner">
+          <div class="insta-placeholder">
+            <span class="insta-emoji">👜</span>
+            <span>Bag batch done ✓</span>
+          </div>
+          <div class="insta-post-overlay"><span>View ↗</span></div>
+        </div>
+      </div>
+      <!-- Post 8 -->
+      <div class="insta-post">
+        <div class="insta-post-inner">
+          <div class="insta-placeholder">
+            <span class="insta-emoji">🌍</span>
+            <span>Delivery day in Jaffna</span>
+          </div>
+          <div class="insta-post-overlay"><span>View ↗</span></div>
+        </div>
+      </div>
+    </div>
+
+    <p class="instagram-note">✦ This gallery will automatically update with @projectloveandloops posts once the Instagram feed is connected on the live site ✦</p>
+  </div>
+</section>
+
+<!-- HOW TO HELP -->
+<section class="help-section" id="help">
+  <div class="help-inner">
+    <div class="section-header">
+      <span class="section-eyebrow">get involved</span>
+      <h2>Join Our Circle of Makers</h2>
+    </div>
+    <div class="help-grid">
+      <div class="help-card">
+        <span class="help-step">01</span>
+        <span class="help-icon">🧶</span>
+        <h3>Grab Your Yarn</h3>
+        <p>Download our pattern guide and item guidelines. No need to be an expert — all skill levels welcome, from beginners to seasoned crocheters.</p>
+      </div>
+      <div class="help-card">
+        <span class="help-step">02</span>
+        <span class="help-icon">💛</span>
+        <h3>Make With Love</h3>
+        <p>Craft a blanket, hat, toy, or bag. Each item is tagged with a little note — so the child knows it was made just for them.</p>
+      </div>
+      <div class="help-card">
+        <span class="help-step">03</span>
+        <span class="help-icon">📦</span>
+        <h3>Send It Our Way</h3>
+        <p>Mail your finished items to our collection address. We handle sorting, packaging, and delivery — your job is just the love part.</p>
+      </div>
+    </div>
+    <div class="help-cta">
+      <a href="patterns.html" class="btn-white">Get Our Pattern Guide →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Love &amp; Loops</div>
+  <p class="footer-tagline">handmade hope, loop by loop</p>
+  <ul class="footer-links">
+    <li><a href="#about">Our Story</a></li>
+    <li><a href="#items">What We Make</a></li>
+    <li><a href="#map">Where We Go</a></li>
+    <li><a href="#instagram">Gallery</a></li>
+    <li><a href="#help">Get Involved</a></li>
+    <li><a href="/cdn-cgi/l/email-protection#4a222f2626250a26253c2f2b242e2625253a396425382d">Contact</a></li>
+  </ul>
+  <p class="footer-credit">Founded with ❤️ by Alaya · loveandloops.org · Every loop counts</p>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // Animated counters
+  function animateCounter(el, target) {
+    let start = 0;
+    const step = target / (2000 / 16);
+    const timer = setInterval(() => {
+      start += step;
+      if (start >= target) {
+        el.textContent = target;
+        clearInterval(timer);
+      } else {
+        el.textContent = Math.floor(start);
+      }
+    }, 16);
+  }
+
+  const statsBar = document.querySelector('.stats-bar');
+  let animated = false;
+  new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting && !animated) {
+      animated = true;
+      animateCounter(document.getElementById('counter1'), 218);
+      animateCounter(document.getElementById('counter2'), 312);
+      animateCounter(document.getElementById('counter3'), 3);
+      animateCounter(document.getElementById('counter4'), 27);
+    }
+  }, { threshold: 0.5 }).observe(statsBar);
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  });
+
+  // Make instagram posts link to instagram
+  document.qu

@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Makers Guide — Love and Loops</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,500;1,400&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #fdf6ec;
+    --warm-white: #fffbf4;
+    --terracotta: #c4704a;
+    --terracotta-light: #e8916d;
+    --sage: #7a9e7e;
+    --sage-light: #a8c5ac;
+    --golden: #d4a843;
+    --brown-dark: #3d2c1e;
+    --brown-mid: #6b4c35;
+    --text: #2e1f12;
+    --text-light: #7a5c3e;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Lora', Georgia, serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='4' height='4' fill='%23fdf6ec'/%3E%3Ccircle cx='1' cy='1' r='0.5' fill='%23d4a84322'/%3E%3Ccircle cx='3' cy='3' r='0.5' fill='%23c4704a11'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 3rem;
+    background: rgba(253,246,236,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1.5px solid #e8d5c0;
+  }
+
+  .nav-logo {
+    font-family: 'Caveat', cursive;
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: var(--terracotta);
+    text-decoration: none;
+  }
+
+  .nav-logo span { color: var(--sage); }
+
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+
+  .nav-links a {
+    font-family: 'Lora', serif;
+    font-size: 0.9rem;
+    color: var(--brown-mid);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--terracotta); }
+
+  .nav-cta {
+    background: var(--terracotta);
+    color: white !important;
+    padding: 0.55rem 1.4rem;
+    border-radius: 50px;
+  }
+
+  /* PAGE HERO */
+  .page-hero {
+    padding: 8rem 3rem 4rem;
+    max-width: 860px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .breadcrumb {
+    font-family: 'Caveat', cursive;
+    font-size: 1rem;
+    color: var(--text-light);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .breadcrumb a { color: var(--terracotta); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+
+  .page-hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    line-height: 1.15;
+    color: var(--brown-dark);
+    margin-bottom: 1rem;
+  }
+
+  .page-hero h1 em { font-style: italic; color: var(--terracotta); }
+
+  .page-hero-sub {
+    font-family: 'Caveat', cursive;
+    font-size: 1.3rem;
+    color: var(--sage);
+    margin-bottom: 1.5rem;
+  }
+
+  .page-hero p {
+    font-size: 1.05rem;
+    line-height: 1.85;
+    color: var(--brown-mid);
+    max-width: 640px;
+  }
+
+  /* SQUIGGLE DIVIDER */
+  .squiggle {
+    width: 100%;
+    height: 24px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 24'%3E%3Cpath d='M0,12 C100,0 200,24 300,12 C400,0 500,24 600,12 C700,0 750,24 800,12' fill='none' stroke='%23e8d5c0' stroke-width='2'/%3E%3C/svg%3E") repeat-x center;
+    margin: 1rem 0 2rem;
+    opacity: 0.8;
+  }
+
+  /* MAIN CONTENT */
+  .content {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 3rem 6rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ALAYA NOTE CARD */
+  .alaya-note {
+    background: var(--warm-white);
+    border: 2px solid #e8d5c0;
+    border-radius: 20px;
+    padding: 2.2rem 2.5rem;
+    margin-bottom: 3rem;
+    position: relative;
+    box-shadow: 6px 6px 0 var(--terracotta), 10px 10px 0 rgba(196,112,74,0.12);
+  }
+
+  .alaya-note-label {
+    font-family: 'Caveat', cursive;
+    font-size: 1rem;
+    color: var(--terracotta);
+    letter-spacing: 0.08em;
+    margin-bottom: 0.6rem;
+  }
+
+  .alaya-note p {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-style: italic;
+    line-height: 1.75;
+    color: var(--brown-dark);
+  }
+
+  .alaya-note-sig {
+    font-family: 'Caveat', cursive;
+    font-size: 1.05rem;
+    color: var(--text-light);
+    margin-top: 1rem;
+  }
+
+  .note-tag {
+    position: absolute;
+    top: -16px;
+    right: 28px;
+    background: var(--sage);
+    color: white;
+    font-family: 'Caveat', cursive;
+    font-size: 0.9rem;
+    padding: 0.35rem 1rem;
+    border-radius: 50px;
+    transform: rotate(-2deg);
+  }
+
+  /* SECTION TITLES */
+  .section-label {
+    font-family: 'Caveat', cursive;
+    font-size: 1rem;
+    color: var(--terracotta);
+    letter-spacing: 0.1em;
+    display: block;
+    margin-bottom: 0.4rem;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--brown-dark);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .section-title em { font-style: italic; color: var(--terracotta); }
+
+  .section-intro {
+    font-size: 1rem;
+    line-height: 1.85;
+    color: var(--brown-mid);
+    margin-bottom: 2rem;
+    max-width: 660px;
+  }
+
+  /* WHY IT MATTERS - reason cards */
+  .reasons-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+    margin-bottom: 3rem;
+  }
+
+  .reason-card {
+    background: var(--warm-white);
+    border: 1.5px solid #e8d5c0;
+    border-radius: 16px;
+    padding: 1.5rem;
+    border-left: 4px solid var(--sage);
+  }
+
+  .reason-icon { font-size: 1.8rem; margin-bottom: 0.6rem; display: block; }
+
+  .reason-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    color: var(--brown-dark);
+    margin-bottom: 0.4rem;
+  }
+
+  .reason-text {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--text-light);
+  }
+
+  /* THE CHEEK TEST */
+  .cheek-test {
+    background: linear-gradient(135deg, var(--terracotta) 0%, var(--terracotta-light) 100%);
+    border-radius: 20px;
+    padding: 2.5rem;
+    margin-bottom: 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cheek-test::before {
+    content: '🤌';
+    position: absolute;
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 6rem;
+    opacity: 0.15;
+  }
+
+  .cheek-test-label {
+    font-family: 'Caveat', cursive;
+    font-size: 1rem;
+    color: rgba(255,255,255,0.75);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.4rem;
+  }
+
+  .cheek-test h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.7rem;
+    color: white;
+    margin-bottom: 0.8rem;
+  }
+
+  .cheek-test p {
+    font-size: 0.98rem;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.88);
+    max-width: 520px;
+  }
+
+  .cheek-test .result {
+    margin-top: 1rem;
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .cheek-result {
+    background: rgba(255,255,255,0.15);
+    border: 1.5px solid rgba(255,255,255,0.3);
+    border-radius: 12px;
+    padding: 0.7rem 1.2rem;
+    font-family: 'Caveat', cursive;
+    font-size: 1rem;
+    color: white;
+  }
+
+  /* YES / NO COLUMNS */
+  .yes-no {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .yes-col, .no-col {
+    border-radius: 20px;
+    overflow: hidden;
+  }
+
+  .col-header {
+    padding: 1rem 1.5rem;
+    font-family: 'Caveat', cursive;
+    font-size: 1.2rem;
+    letter-spacing: 0.05em;
+  }
+
+  .yes-col .col-header { background: var(--sage); color: white; }
+  .no-col .col-header { background: var(--brown-dark); color: white; }
+
+  .col-body {
+    border: 2px solid #e8d5c0;
+    border-top: none;
+    border-radius: 0 0 20px 20px;
+    padding: 1.2rem 1.5rem;
+    background: var(--warm-white);
+  }
+
+  .yarn-item {
+    padding: 0.8rem 0;
+    border-bottom: 1px dashed #e8d5c0;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+  }
+
+  .yarn-item:last-child { border-bottom: none; }
+
+  .yarn-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 0.1rem; }
+
+  .yarn-name {
+    font-family: 'Lora', serif;
+    font-size: 0.9rem;
+    color: var(--brown-dark);
+    font-weight: bold;
+    display: block;
+    margin-bottom: 0.2rem;
+  }
+
+  .yarn-why {
+    font-size: 0.82rem;
+    color: var(--text-light);
+    line-height: 1.5;
+  }
+
+  /* PRO TIPS */
+  .tips-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  .tip-card {
+    background: var(--warm-white);
+    border: 1.5px solid #e8d5c0;
+    border-left: 4px solid var(--golden);
+    border-radius: 14px;
+    padding: 1.3rem 1.5rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .tip-icon { font-size: 1.5rem; flex-shrink: 0; margin-top: 0.1rem; }
+
+  .tip-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--brown-dark);
+    margin-bottom: 0.3rem;
+  }
+
+  .tip-text {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--text-light);
+  }
+
+  /* THANK YOU BANNER */
+  .thankyou {
+    background: var(--brown-dark);
+    border-radius: 20px;
+    padding: 3rem;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .thankyou-emoji { font-size: 3rem; display: block; margin-bottom: 1rem; }
+
+  .thankyou h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--terracotta-light);
+    margin-bottom: 0.8rem;
+  }
+
+  .thankyou p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: rgba(253,246,236,0.75);
+    max-width: 480px;
+    margin: 0 auto 1.5rem;
+  }
+
+  .btn-primary {
+    background: var(--terracotta);
+    color: white;
+    padding: 0.85rem 2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-family: 'Lora', serif;
+    font-size: 0.95rem;
+    transition: transform 0.2s, background 0.2s;
+    box-shadow: 0 4px 20px rgba(196,112,74,0.4);
+    display: inline-block;
+  }
+
+  .btn-primary:hover { transform: translateY(-2px); background: var(--terracotta-light); }
+
+  /* FOOTER */
+  footer {
+    background: var(--brown-dark);
+    color: var(--cream);
+    padding: 2.5rem 3rem;
+    text-align: center;
+  }
+
+  .footer-logo { font-family: 'Caveat', cursive; font-size: 1.8rem; color: var(--terracotta-light); margin-bottom: 0.4rem; }
+  .footer-tagline { font-family: 'Lora', serif; font-style: italic; color: rgba(253,246,236,0.45); font-size: 0.9rem; margin-bottom: 1.5rem; }
+  .footer-links { display: flex; gap: 2rem; justify-content: center; list-style: none; flex-wrap: wrap; }
+  .footer-links a { color: rgba(253,246,236,0.55); text-decoration: none; font-size: 0.88rem; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--terracotta-light); }
+
+  /* DIVIDER */
+  .section-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #e8d5c0, transparent);
+    margin: 2.5rem 0;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-in { animation: fadeUp 0.7s ease both; }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .page-hero, .content { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .reasons-grid, .yes-no { grid-template-columns: 1fr; }
+    .page-hero { padding-top: 6rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">Love <span>&</span> Loops</a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">Our Story</a></li>
+    <li><a href="index.html#items">What We Make</a></li>
+    <li><a href="index.html#map">Where We Go</a></li>
+    <li><a href="index.html#instagram">Gallery</a></li>
+    <li><a href="index.html#help" class="nav-cta">Donate Items</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero fade-in">
+  <div class="breadcrumb">
+    <a href="index.html">Home</a> › Makers Guide
+  </div>
+  <h1>Make something that <em>really</em> feels like love</h1>
+  <p class="page-hero-sub">patterns & yarn guidelines for our makers</p>
+  <p>If you're here, it means you're ready to pick up your hook or needles and make something that will land in the hands of a child going through something really hard. That means everything. Here's everything you need to know to make sure your item is as comfortable and safe as possible.</p>
+  <div class="squiggle"></div>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+
+  <!-- ALAYA'S NOTE -->
+  <div class="alaya-note fade-in">
+    <div class="note-tag">✦ from alaya</div>
+    <div class="alaya-note-label">a note from the founder</div>
+    <p>"When I first started making items for the children in Sri Lanka, I didn't realise how much the yarn choice mattered. A blanket that feels normal to us can feel scratchy and uncomfortable to a baby or to someone going through chemotherapy — whose skin is so, so sensitive. These guidelines exist so that every single item we send is genuinely comforting, not just well-intentioned. The children receiving your work deserve nothing less than the softest, most thoughtful thing you've ever made."</p>
+    <p class="alaya-note-sig">— Alaya, Founder &amp; Chief Loop Officer 🧶</p>
+  </div>
+
+  <!-- WHY IT MATTERS -->
+  <span class="section-label">the why behind the rules</span>
+  <h2 class="section-title">Why yarn choice <em>matters so much</em></h2>
+  <p class="section-intro">Our items go to two groups with exceptionally sensitive skin: children in hospitals (including babies and those undergoing chemotherapy) and children in orphanages who may not have access to gentle clothing. Here's what's actually happening with their skin — and why our choices matter.</p>
+
+  <div class="reasons-grid">
+    <div class="reason-card">
+      <span class="reason-icon">🌡️</span>
+      <div class="reason-title">Chemotherapy changes everything</div>
+      <p class="reason-text">Chemo can make the scalp and skin feel tender, itchy, and hypersensitive. What feels "a little scratchy" against your hand can genuinely feel like sandpaper to a chemo patient. We're not exaggerating — we promise.</p>
+    </div>
+    <div class="reason-card">
+      <span class="reason-icon">🌬️</span>
+      <div class="reason-title">Temperature regulation</div>
+      <p class="reason-text">Many patients experience unpredictable hot flashes and chills. Natural-blend fibres help skin breathe — heavy synthetics can trap heat and cause real discomfort for someone already struggling.</p>
+    </div>
+    <div class="reason-card">
+      <span class="reason-icon">🧼</span>
+      <div class="reason-title">These items get washed a lot</div>
+      <p class="reason-text">Hospital items are washed frequently at high temperatures for hygiene. Your yarn needs to survive the machine without shrinking, felting, or falling apart — or it won't be any use to anyone.</p>
+    </div>
+    <div class="reason-card">
+      <span class="reason-icon">👶</span>
+      <div class="reason-title">Newborn skin is fragile</div>
+      <p class="reason-text">A newborn's skin is thinner than you think. Anything even slightly rough can cause irritation or rashes. For our tiniest recipients, we need to be extra, extra careful.</p>
+    </div>
+  </div>
+
+  <!-- THE CHEEK TEST -->
+  <div class="cheek-test">
+    <div class="cheek-test-label">the most important step ✦</div>
+    <h3>The Cheek Test</h3>
+    <p>Before you cast on a single stitch — take your yarn and rub it gently against your cheek for 30 seconds. This is Alaya's rule, and it's non-negotiable.</p>
+    <div class="result">
+      <div class="cheek-result">😌 Feels like a soft cloud? You're good to go!</div>
+      <div class="cheek-result">😬 Even slightly scratchy? Save it for something else.</div>
+    </div>
+  </div>
+
+  <!-- YES / NO YARN -->
+  <span class="section-label">what to use (and what to skip)</span>
+  <h2 class="section-title">The yarn <em>yes</em> and <em>no</em> list</h2>
+  <p class="section-intro">Not sure what to grab at the craft store? Here's exactly what to look for — and what to put back on the shelf.</p>
+
+  <div class="yes-no">
+    <div class="yes-col">
+      <div class="col-header">✅ &nbsp;Yes please — approved yarns</div>
+      <div class="col-body">
+        <div class="yarn-item">
+          <span class="yarn-icon">🧶</span>
+          <div>
+            <span class="yarn-name">Premium soft acrylics</span>
+            <span class="yarn-why">Brands like Lion Brand Pound of Love, Caron Simply Soft, or Red Heart Soft. Machine washable, durable, and genuinely silky. Our most-used choice.</span>
+          </div>
+        </div>
+        <div class="yarn-item">
+          <span class="yarn-icon">🌿</span>
+          <div>
+            <span class="yarn-name">Cotton or cotton blends</span>
+            <span class="yarn-why">Breathable, hypoallergenic, and cool against skin. Great for warmer climates like Sri Lanka. Must be labelled machine washable.</span>
+          </div>
+        </div>
+        <div class="yarn-item">
+          <span class="yarn-icon">🎋</span>
+          <div>
+            <span class="yarn-name">Bamboo blends</span>
+            <span class="yarn-why">Incredibly soft, naturally antibacterial, and gentle on sensitive skin. A little pricier but worth it for our recipients.</span>
+          </div>
+        </div>
+        <div class="yarn-item">
+          <span class="yarn-icon">✔️</span>
+          <div>
+            <span class="yarn-name">The golden rule</span>
+            <span class="yarn-why">Whatever you choose, it must be labelled Machine Washable AND Tumble Dry Safe. Busy parents and recovering patients cannot hand-wash anything.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="no-col">
+      <div class="col-header">🚫 &nbsp;No thanks — please avoid these</div>
+      <div class="col-body">
+        <div class="yarn-item">
+          <span class="yarn-icon">❌</span>
+          <div>
+            <span class="yarn-name">Chenille or "blanket" yarn</span>
+            <span class="yarn-why">We know, we know — it looks so cozy. But chenille sheds fibres, traps bacteria, and the loops pull out over time creating snag hazards for little fingers.</span>
+          </div>
+        </div>
+        <div class="yarn-item">
+          <span class="yarn-icon">❌</span>
+          <div>
+            <span class="yarn-name">Metallic or glitter threads</span>
+            <span class="yarn-why">Pretty to look at, genuinely painful to wear. Metallic fibres can cause micro-cuts on sensitive or post-chemo skin. None, please.</span>
+          </div>
+        </div>
+        <div class="yarn-item">
+          <span class="yarn-icon">❌</span>
+          <div>
+            <span class="yarn-name">Wool or animal fibres</span>
+            <span class="yarn-why">Many people have undiagnosed wool allergies, and wool is simply too itchy for a bare, tender scalp. Even "superwash" wool — please skip it for these items.</span>
+          </div>
+        </div>
+        <div class="yarn-item">
+          <span class="yarn-icon">❌</span>
+          <div>
+            <span class="yarn-name">Scented yarn (or scented storage)</span>
+            <span class="yarn-why">Please don't store your yarn or finished items near heavy perfumes, essential oils, or cigarette smoke. Chemotherapy patients can be severely sensitive to smells during treatment.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- PRO TIPS -->
+  <span class="section-label">maker tips from alaya</span>
+  <h2 class="section-title">Little details that make a <em>big</em> difference</h2>
+  <p class="section-intro">These are the things I've learned from making and delivering items myself. Small choices that turn a good item into one that a child will actually love holding.</p>
+
+  <div class="tips-stack">
+    <div class="tip-card">
+      <span class="tip-icon">🪡</span>
+      <div>
+        <div class="tip-title">Work in the round for hats</div>
+        <p class="tip-text">If you're making hats, try to work "in the round" rather than flat-and-seamed. A thick seam on the inside of a hat can create a pressure point for someone lying in a hospital bed — especially for a baby in a crib whose head barely moves. A seamless hat is a comfort hat.</p>
+      </div>
+    </div>
+    <div class="tip-card">
+      <span class="tip-icon">🎀</span>
+      <div>
+        <div class="tip-title">Weave in your ends really well</div>
+        <p class="tip-text">Loose yarn ends can come undone in the wash and become a choking or tangle hazard for little ones. Please weave in all ends at least 2–3 times in different directions. A few extra minutes here matters so much.</p>
+      </div>
+    </div>
+    <div class="tip-card">
+      <span class="tip-icon">📏</span>
+      <div>
+        <div class="tip-title">Size guidelines for items</div>
+        <p class="tip-text">Blankets: roughly 30" × 30" for babies, 36" × 36" for toddlers. Hats: newborn (13–14" circumference), 0–3 months (14–15"), 3–6 months (15–16"). Toys: palm-sized to fist-sized. Bags: small tote, roughly 8" × 10". When in doubt, smaller is safer — large items are harder to wash and dry thoroughly.</p>
+      </div>
+    </div>
+    <div class="tip-card">
+      <span class="tip-icon">💌</span>
+      <div>
+        <div class="tip-title">Add a little love note</div>
+        <p class="tip-text">We encourage every maker to include a small card or tag with their item — just your first name and a simple message like "Made with love for you." Knowing a real person made something just for them means the world to a child in a hospital or orphanage. You don't have to, but it's our favourite part.</p>
+      </div>
+    </div>
+    <div class="tip-card">
+      <span class="tip-icon">🌈</span>
+      <div>
+        <div class="tip-title">Colours to reach for</div>
+        <p class="tip-text">Bright, cheerful colours are wonderful — children love them! Soft pastels are equally beautiful. We'd gently suggest avoiding very dark colours (dark navy, black, dark grey) for baby items as they can feel a little heavy. But honestly? Make what feels joyful to you. Joy is contagious and children feel it.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- THANK YOU -->
+  <div class="thankyou">
+    <span class="thankyou-emoji">🧶</span>
+    <h3>Thank you for making this.</h3>
+    <p>Every item you make is proof that someone cared enough to sit down, pick up their yarn, and spend their time on a child they've never met. That is a genuinely beautiful thing. We are so grateful you're part of this.</p>
+    <a href="index.html#help" class="btn-primary">Ready to send your items? →</a>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Love &amp; Loops</div>
+  <p class="footer-tagline">handmade hope, loop by loop</p>
+  <ul class="footer-links">
+    <li><a href="index.html#about">Our Story</a></li>
+    <li><a href="index.html#items">What We Make</a></li>
+    <li><a href="index.html#map">Where We Go</a></li>
+    <li><a href="index.html#help">Get Involved</a></li>
+    <li><a href="mailto:hello@loveandloops.org">Contact</a></li>
+  </ul>
+</footer>
+
+<script>
+  // Fade in sections on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reason-card, .tip-card, .yarn-item').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(16px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  });
+</script>
+</body>
+</html>
