@@ -215,37 +215,7 @@
     transform: translateY(-2px);
   }
 
-  /* TICKER */
-  .ticker-wrap {
-    background: var(--terracotta);
-    overflow: hidden;
-    padding: 0.7rem 0;
-  }
 
-  .ticker {
-    display: flex;
-    gap: 3rem;
-    animation: ticker 28s linear infinite;
-    white-space: nowrap;
-  }
-
-  @keyframes ticker {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
-
-  .ticker-item {
-    font-family: 'Caveat', cursive;
-    font-size: 1.05rem;
-    color: white;
-    letter-spacing: 0.05em;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    flex-shrink: 0;
-  }
-
-  .ticker-item::before { content: '🧶'; font-size: 0.9rem; }
 
   /* STATS */
   .stats-bar {
@@ -290,43 +260,43 @@
 
   /* ABOUT */
   .about {
-    padding: 6rem 3rem;
-    max-width: 1200px;
+    padding: 5rem 3rem;
+    max-width: 780px;
     margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5rem;
-    align-items: center;
+    text-align: center;
   }
 
-  .about-card {
-    background: var(--warm-white);
-    border-radius: 20px;
-    padding: 3rem;
-    border: 2px solid #e8d5c0;
-    position: relative;
-    box-shadow: 8px 8px 0px var(--terracotta), 12px 12px 0px rgba(196,112,74,0.15);
-  }
-
-  .about-card-label { font-family: 'Caveat', cursive; font-size: 1rem; color: var(--terracotta); letter-spacing: 0.08em; margin-bottom: 0.5rem; }
-  .founder-quote { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-style: italic; line-height: 1.6; color: var(--brown-dark); margin-bottom: 1.5rem; }
-  .founder-name { font-family: 'Caveat', cursive; font-size: 1.1rem; color: var(--text-light); }
-
-  .floating-tag {
-    position: absolute;
+  .about-eyebrow {
     font-family: 'Caveat', cursive;
-    font-size: 0.95rem;
-    padding: 0.5rem 1.2rem;
-    border-radius: 50px;
-    color: white;
+    font-size: 1.1rem;
+    color: var(--terracotta);
+    letter-spacing: 0.1em;
+    display: block;
+    margin-bottom: 0.8rem;
   }
 
-  .floating-tag.top { top: -18px; right: 30px; background: var(--sage); transform: rotate(-3deg); }
-  .floating-tag.bottom { bottom: -18px; left: 30px; background: var(--golden); color: var(--brown-dark); transform: rotate(2deg); }
+  .about h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.2;
+    color: var(--brown-dark);
+    margin-bottom: 2rem;
+  }
 
-  .about-text h2 { font-family: 'Playfair Display', serif; font-size: 2.6rem; line-height: 1.2; color: var(--brown-dark); margin-bottom: 1.5rem; }
-  .about-text h2 em { font-style: italic; color: var(--terracotta); }
-  .about-text p { font-size: 1rem; line-height: 1.9; color: var(--brown-mid); margin-bottom: 1.2rem; }
+  .about h2 em { font-style: italic; color: var(--terracotta); }
+
+  .about p {
+    font-size: 1.05rem;
+    line-height: 1.9;
+    color: var(--brown-mid);
+    margin-bottom: 1.2rem;
+    text-align: left;
+  }
+
+  .about-btn-wrap {
+    margin-top: 2rem;
+    text-align: center;
+  }
 
   /* ITEMS */
   .items-section {
@@ -796,24 +766,6 @@
   <div class="hero-squiggle"></div>
 </section>
 
-<!-- TICKER -->
-<div class="ticker-wrap">
-  <div class="ticker">
-    <span class="ticker-item">47 blankets donated this month</span>
-    <span class="ticker-item">New delivery: Colombo Children's Hospital, Sri Lanka</span>
-    <span class="ticker-item">23 hats sent to Jaffna Orphanage</span>
-    <span class="ticker-item">Urgent need: warm blankets, Kandy region</span>
-    <span class="ticker-item">12 volunteers crafting this week</span>
-    <span class="ticker-item">218 items delivered since launch</span>
-    <span class="ticker-item">47 blankets donated this month</span>
-    <span class="ticker-item">New delivery: Colombo Children's Hospital, Sri Lanka</span>
-    <span class="ticker-item">23 hats sent to Jaffna Orphanage</span>
-    <span class="ticker-item">Urgent need: warm blankets, Kandy region</span>
-    <span class="ticker-item">12 volunteers crafting this week</span>
-    <span class="ticker-item">218 items delivered since launch</span>
-  </div>
-</div>
-
 <!-- STATS -->
 <div class="stats-bar">
   <div class="stat-item">
@@ -839,21 +791,13 @@
 
 <!-- ABOUT -->
 <section class="about" id="about">
-  <div class="about-visual">
-    <div class="about-card">
-      <div class="floating-tag top">🧶 Founded 2024</div>
-      <div class="about-card-label">From the founder</div>
-      <p class="founder-quote">"Every child deserves to know they are loved. I started looping hope, one stitch at a time — and I hope you'll join me."</p>
-      <p class="founder-name">— Alaya, Founder &amp; Chief Loop Officer</p>
-      <div class="floating-tag bottom">🌍 Starting in Sri Lanka</div>
-    </div>
-  </div>
-  <div class="about-text">
-    <h2>Every child deserves to feel <em>loved</em></h2>
-    <p>Love and Loops was founded by Alaya at just 16 years old, driven by a simple but powerful belief: that a handmade blanket or toy carries something no factory can replicate — the warmth of human hands and the intention behind every loop.</p>
-    <p>We began by connecting with hospitals and orphanages in villages across Sri Lanka, bringing crocheted and knitted items made by friends, family, and volunteers from around the world.</p>
-    <p>Each item is handmade with care, tagged with love, and delivered to children who deserve to feel seen and cherished.</p>
-    <a href="#help" class="btn-primary" style="margin-top:1rem;">Join Our Circle of Makers</a>
+  <span class="about-eyebrow">✦ our story ✦</span>
+  <h2>A trip that changed <em>everything</em></h2>
+  <p>Last year, my family visited Sri Lanka — and I came home a different person. Seeing the children there lit something up in me. I'd been crocheting and knitting for years, and suddenly I knew exactly what all those loops were for: spreading love to kids who needed to feel it most.</p>
+  <p>I'm so excited to start right there in Sri Lanka, and to do it alongside my cousins Aura and Taytay, who feel the same way I do about putting smiles on children's faces. Together we've been connecting with hospitals and orphanages across Sri Lanka, delivering crocheted and knitted items made by friends, family, and volunteers from around the world.</p>
+  <p>Every single item is handmade with care, tagged with love, and placed in the hands of a child who deserves to feel seen and cherished. That's what Love and Loops is — one loop at a time.</p>
+  <div class="about-btn-wrap">
+    <a href="#help" class="btn-primary">Join Our Circle of Makers</a>
   </div>
 </section>
 
