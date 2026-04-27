@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Map Preview — Love and Loops</title>
+<title>Love and Loops — Handmade Hope, Loop by Loop</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,500;1,400&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
 <style>
@@ -14,6 +14,7 @@
     --terracotta-light: #e8916d;
     --sage: #7a9e7e;
     --sage-light: #a8c5ac;
+    --dusty-rose: #d4a0a0;
     --golden: #d4a843;
     --brown-dark: #3d2c1e;
     --brown-mid: #6b4c35;
@@ -22,172 +23,157 @@
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
   body {
     font-family: 'Lora', Georgia, serif;
     background: var(--cream);
     color: var(--text);
-    padding: 3rem;
+    overflow-x: hidden;
   }
 
-  /* SECTION HEADER */
-  .map-header {
-    text-align: center;
-    margin-bottom: 2.5rem;
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='4' height='4' fill='%23fdf6ec'/%3E%3Ccircle cx='1' cy='1' r='0.5' fill='%23d4a84322'/%3E%3Ccircle cx='3' cy='3' r='0.5' fill='%23c4704a11'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
   }
 
-  .section-eyebrow {
-    font-family: 'Caveat', cursive;
-    font-size: 1.1rem;
-    color: var(--terracotta);
-    letter-spacing: 0.1em;
-    display: block;
-    margin-bottom: 0.5rem;
-  }
-
-  .map-header h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.6rem;
-    color: var(--brown-dark);
-    line-height: 1.2;
-  }
-
-  .map-header p {
-    font-size: 0.95rem;
-    color: var(--text-light);
-    margin-top: 0.6rem;
-    font-style: italic;
-  }
-
-  /* LAYOUT */
-  .map-layout {
-    display: grid;
-    grid-template-columns: 1fr 320px;
-    gap: 2rem;
-    align-items: start;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  /* MAP CONTAINER */
-  .map-wrap {
-    background: var(--warm-white);
-    border-radius: 20px;
-    border: 2px solid #e8d5c0;
-    overflow: hidden;
-    position: relative;
-    box-shadow: 0 8px 32px rgba(61,44,30,0.1);
-  }
-
-  .map-wrap iframe {
-    width: 100%;
-    height: 460px;
-    border: none;
-    display: block;
-  }
-
-  /* Custom map overlay label */
-  .map-label {
-    position: absolute;
-    top: 14px;
-    left: 14px;
-    background: white;
-    border-radius: 12px;
-    padding: 0.6rem 1.1rem;
-    font-family: 'Caveat', cursive;
-    font-size: 1rem;
-    color: var(--brown-dark);
-    box-shadow: 0 2px 12px rgba(0,0,0,0.12);
-    border: 1.5px solid #e8d5c0;
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    z-index: 10;
-    pointer-events: none;
+    justify-content: space-between;
+    padding: 1.2rem 3rem;
+    background: rgba(253,246,236,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1.5px solid #e8d5c0;
   }
 
-  .map-dot {
-    width: 10px;
-    height: 10px;
-    background: var(--terracotta);
-    border-radius: 50%;
-    animation: pulse 2s infinite;
-    flex-shrink: 0;
-  }
-
-  @keyframes pulse {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(196,112,74,0.4); }
-    50% { box-shadow: 0 0 0 6px rgba(196,112,74,0); }
-  }
-
-  /* NEEDS PANEL */
-  .needs-panel {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .needs-panel h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.3rem;
-    color: var(--brown-dark);
-    margin-bottom: 0.2rem;
-  }
-
-  .needs-sub {
-    font-size: 0.85rem;
-    color: var(--text-light);
-    font-style: italic;
-    margin-bottom: 0.5rem;
-  }
-
-  .needs-card {
-    background: var(--warm-white);
-    border: 2px solid #e8d5c0;
-    border-radius: 16px;
-    padding: 1.2rem;
-    transition: border-color 0.2s, transform 0.2s;
-    cursor: default;
-  }
-
-  .needs-card:hover {
-    border-color: var(--terracotta);
-    transform: translateY(-2px);
-  }
-
-  .needs-location {
+  .nav-logo {
     font-family: 'Caveat', cursive;
-    font-size: 0.95rem;
+    font-size: 1.7rem;
+    font-weight: 700;
     color: var(--terracotta);
-    margin-bottom: 0.2rem;
+    letter-spacing: 0.02em;
   }
 
-  .needs-type {
-    font-family: 'Playfair Display', serif;
-    font-size: 0.88rem;
+  .nav-logo span { color: var(--sage); }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'Lora', serif;
+    font-size: 0.9rem;
     color: var(--brown-mid);
-    margin-bottom: 0.6rem;
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
   }
 
-  .needs-items {
+  .nav-links a:hover { color: var(--terracotta); }
+
+  .nav-cta {
+    background: var(--terracotta);
+    color: white !important;
+    padding: 0.55rem 1.4rem;
+    border-radius: 50px;
+    transition: background 0.2s !important;
+  }
+
+  .nav-cta:hover { background: var(--terracotta-light) !important; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
     display: flex;
-    gap: 0.4rem;
-    flex-wrap: wrap;
+    align-items: center;
+    padding: 7rem 3rem 4rem;
+    position: relative;
+    overflow: hidden;
   }
 
-  .need-tag {
-    background: var(--cream);
-    border: 1px solid #e0cdb8;
-    color: var(--text-light);
+  .hero-bg-yarn {
+    position: absolute;
+    right: -60px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 580px;
+    height: 580px;
+    opacity: 0.12;
+  }
+
+  .hero-squiggle {
+    position: absolute;
+    bottom: 40px;
+    left: 0;
+    right: 0;
+    height: 40px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 40'%3E%3Cpath d='M0,20 C180,0 360,40 540,20 C720,0 900,40 1080,20 C1260,0 1380,40 1440,20' fill='none' stroke='%23c4704a' stroke-width='2' opacity='0.3'/%3E%3C/svg%3E") repeat-x;
+  }
+
+  .hero-content {
+    max-width: 680px;
+    position: relative;
+    z-index: 1;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-eyebrow {
     font-family: 'Caveat', cursive;
-    font-size: 0.8rem;
-    padding: 0.15rem 0.6rem;
-    border-radius: 20px;
+    font-size: 1.2rem;
+    color: var(--sage);
+    letter-spacing: 0.08em;
+    margin-bottom: 0.8rem;
+    animation: fadeUp 1s 0.1s ease both;
   }
 
-  .urgent-tag {
-    background: rgba(196,112,74,0.12);
-    border-color: var(--terracotta);
-    color: var(--terracotta);
+  .hero h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(3rem, 6vw, 5rem);
+    line-height: 1.1;
+    color: var(--brown-dark);
+    margin-bottom: 1.2rem;
+    animation: fadeUp 1s 0.2s ease both;
+  }
+
+  .hero h1 em { font-style: italic; color: var(--terracotta); }
+
+  .hero-tagline {
+    font-family: 'Caveat', cursive;
+    font-size: 1.5rem;
+    color: var(--text-light);
+    margin-bottom: 1.8rem;
+    animation: fadeUp 1s 0.3s ease both;
+  }
+
+  .hero p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--brown-mid);
+    max-width: 520px;
+    margin-bottom: 2.5rem;
+    animation: fadeUp 1s 0.4s ease both;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    animation: fadeUp 1s 0.5s ease both;
   }
 
   .btn-primary {
@@ -198,158 +184,653 @@
     text-decoration: none;
     font-family: 'Lora', serif;
     font-size: 0.95rem;
-    transition: transform 0.2s, background 0.2s;
+    letter-spacing: 0.03em;
+    transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
     box-shadow: 0 4px 20px rgba(196,112,74,0.3);
-    display: block;
-    text-align: center;
-    margin-top: 0.5rem;
+    display: inline-block;
   }
 
   .btn-primary:hover {
     transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(196,112,74,0.4);
     background: var(--terracotta-light);
   }
 
-  /* LEGEND */
-  .map-legend {
-    display: flex;
-    gap: 1.5rem;
-    padding: 0.8rem 1.2rem;
-    border-top: 1px solid #e8d5c0;
-    background: var(--warm-white);
+  .btn-secondary {
+    background: transparent;
+    color: var(--sage);
+    padding: 0.85rem 2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-family: 'Lora', serif;
+    font-size: 0.95rem;
+    border: 2px solid var(--sage);
+    transition: transform 0.2s, background 0.2s, color 0.2s;
+    display: inline-block;
   }
 
-  .legend-item {
+  .btn-secondary:hover {
+    background: var(--sage);
+    color: white;
+    transform: translateY(-2px);
+  }
+
+
+
+  /* STATS */
+  .stats-bar {
+    background: var(--brown-dark);
+    color: var(--cream);
+    padding: 1.4rem 3rem;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    font-family: 'Caveat', cursive;
-    font-size: 0.9rem;
-    color: var(--text-light);
+    justify-content: center;
+    gap: 4rem;
+    flex-wrap: wrap;
+    position: relative;
+    overflow: hidden;
   }
 
-  .legend-dot {
-    width: 11px;
-    height: 11px;
-    border-radius: 50%;
+  .stats-bar::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(255,255,255,0.02) 20px, rgba(255,255,255,0.02) 40px);
+  }
+
+  .stat-item { text-align: center; position: relative; z-index: 1; }
+
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem;
+    color: var(--golden);
+    display: block;
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-family: 'Caveat', cursive;
+    font-size: 1rem;
+    color: var(--sage-light);
+    letter-spacing: 0.06em;
+    margin-top: 0.3rem;
+  }
+
+  .stat-divider { width: 1px; height: 40px; background: rgba(255,255,255,0.15); }
+
+  /* ABOUT */
+  .about {
+    padding: 5rem 3rem;
+    max-width: 780px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    background: var(--cream);
+  }
+
+  .about-eyebrow {
+    font-family: 'Caveat', cursive;
+    font-size: 1.1rem;
+    color: var(--terracotta);
+    letter-spacing: 0.1em;
+    display: block;
+    margin-bottom: 0.8rem;
+  }
+
+  .about h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.2;
+    color: var(--brown-dark);
+    margin-bottom: 2rem;
+  }
+
+  .about h2 em { font-style: italic; color: var(--terracotta); }
+
+  .about p {
+    font-size: 1.05rem;
+    line-height: 1.9;
+    color: var(--brown-mid);
+    margin-bottom: 1.2rem;
+    text-align: left;
+  }
+
+  .about-btn-wrap {
+    margin-top: 2rem;
+    text-align: center;
+  }
+
+  /* ITEMS */
+  .items-section {
+    background: var(--brown-dark);
+    padding: 6rem 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .items-section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 60px;
+    background: var(--cream);
+    clip-path: ellipse(55% 100% at 50% 0%);
+  }
+
+  .items-section::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 60px;
+    background: var(--cream);
+    clip-path: ellipse(55% 100% at 50% 100%);
+  }
+
+  .items-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+
+  .section-header { text-align: center; margin-bottom: 3.5rem; }
+
+  .section-eyebrow {
+    font-family: 'Caveat', cursive;
+    font-size: 1.1rem;
+    letter-spacing: 0.1em;
+    display: block;
+    margin-bottom: 0.6rem;
+  }
+
+  .section-header h2 { font-family: 'Playfair Display', serif; font-size: 2.6rem; line-height: 1.2; }
+
+  .items-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+
+  .item-card {
+    background: rgba(255,255,255,0.06);
+    border: 1.5px solid rgba(255,255,255,0.12);
+    border-radius: 16px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    transition: transform 0.3s, background 0.3s;
+  }
+
+  .item-card:hover { transform: translateY(-6px); background: rgba(255,255,255,0.1); }
+
+  .item-emoji { font-size: 3rem; display: block; margin-bottom: 1rem; }
+  .item-name { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--cream); margin-bottom: 0.6rem; }
+  .item-desc { font-size: 0.88rem; color: rgba(253,246,236,0.6); line-height: 1.7; }
+  .item-tag { display: inline-block; margin-top: 1rem; background: rgba(196,112,74,0.3); color: var(--terracotta-light); font-family: 'Caveat', cursive; font-size: 0.85rem; padding: 0.25rem 0.8rem; border-radius: 20px; }
+
+  .urgent-tag { background: rgba(196,112,74,0.12); border-color: var(--terracotta); color: var(--terracotta); }
+
+  /* INSTAGRAM SECTION */
+  .instagram-section {
+    padding: 5rem 3rem;
+    background: var(--warm-white);
+    border-top: 2px solid #e8d5c0;
+    border-bottom: 2px solid #e8d5c0;
+  }
+
+  .instagram-inner { max-width: 1200px; margin: 0 auto; }
+
+  .instagram-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .instagram-title-group {}
+
+  .instagram-title-group .section-eyebrow { color: var(--terracotta); text-align: left; }
+
+  .instagram-title-group h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    color: var(--brown-dark);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .instagram-handle-link {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    color: white;
+    padding: 0.7rem 1.4rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-family: 'Caveat', cursive;
+    font-size: 1.1rem;
+    transition: transform 0.2s, opacity 0.2s;
+    box-shadow: 0 4px 16px rgba(220,39,67,0.3);
     flex-shrink: 0;
   }
 
-  /* NOTE BOX */
-  .note-box {
-    max-width: 1200px;
-    margin: 2rem auto 0;
-    background: #eef5ee;
-    border-left: 4px solid var(--sage);
-    border-radius: 12px;
-    padding: 1rem 1.4rem;
-    font-family: 'Caveat', cursive;
-    font-size: 1rem;
-    color: var(--brown-mid);
-    line-height: 1.6;
+  .instagram-handle-link:hover { transform: translateY(-2px); opacity: 0.92; }
+
+  .insta-icon {
+    width: 22px;
+    height: 22px;
+    fill: white;
   }
 
-  @media (max-width: 900px) {
+  /* Instagram grid */
+  .instagram-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0.8rem;
+  }
+
+  .insta-post {
+    aspect-ratio: 1;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    background: #f0e8dc;
+  }
+
+  .insta-post:nth-child(1) { grid-column: span 2; grid-row: span 2; border-radius: 16px; }
+
+  .insta-post-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .insta-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-family: 'Caveat', cursive;
+    font-size: 0.85rem;
+    color: var(--text-light);
+    text-align: center;
+    padding: 0.5rem;
+  }
+
+  /* Each post has a different warm background */
+  .insta-post:nth-child(1) .insta-placeholder { background: linear-gradient(135deg, #f5e6d3, #e8c9a8); font-size: 1rem; }
+  .insta-post:nth-child(2) .insta-placeholder { background: linear-gradient(135deg, #dcebd8, #c4d9bf); }
+  .insta-post:nth-child(3) .insta-placeholder { background: linear-gradient(135deg, #f0ddd0, #e2c4b0); }
+  .insta-post:nth-child(4) .insta-placeholder { background: linear-gradient(135deg, #e8d5d5, #d4b8b8); }
+  .insta-post:nth-child(5) .insta-placeholder { background: linear-gradient(135deg, #f5edd0, #e8d490); }
+  .insta-post:nth-child(6) .insta-placeholder { background: linear-gradient(135deg, #d8e8dc, #b8d0bf); }
+  .insta-post:nth-child(7) .insta-placeholder { background: linear-gradient(135deg, #f0e0d8, #e0c4b4); }
+  .insta-post:nth-child(8) .insta-placeholder { background: linear-gradient(135deg, #dde8dd, #c0d4c0); }
+
+  .insta-post-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(61,44,30,0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s;
+    opacity: 0;
+  }
+
+  .insta-post:hover .insta-post-overlay {
+    background: rgba(61,44,30,0.5);
+    opacity: 1;
+  }
+
+  .insta-post-overlay span {
+    font-family: 'Caveat', cursive;
+    color: white;
+    font-size: 0.95rem;
+  }
+
+  .insta-emoji { font-size: 2rem; }
+  .insta-big-emoji { font-size: 3.5rem; }
+
+  .instagram-note {
+    margin-top: 1.8rem;
+    text-align: center;
+    font-size: 0.88rem;
+    color: var(--text-light);
+    font-style: italic;
+  }
+
+  /* HOW TO HELP */
+  .help-section {
+    background: linear-gradient(135deg, var(--sage) 0%, #5d8c61 100%);
+    padding: 6rem 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .help-section::before {
+    content: '';
+    position: absolute;
+    top: -40px; left: -40px;
+    width: 300px; height: 300px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 50%;
+  }
+
+  .help-section::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; right: -60px;
+    width: 400px; height: 400px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 50%;
+  }
+
+  .help-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+  .help-section .section-eyebrow { color: rgba(255,255,255,0.7); }
+  .help-section .section-header h2 { color: white; }
+
+  .help-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; }
+
+  .help-card {
+    background: rgba(255,255,255,0.12);
+    border: 1.5px solid rgba(255,255,255,0.2);
+    border-radius: 20px;
+    padding: 2.2rem;
+    text-align: center;
+    backdrop-filter: blur(4px);
+    transition: transform 0.3s, background 0.3s;
+  }
+
+  .help-card:hover { transform: translateY(-4px); background: rgba(255,255,255,0.18); }
+
+  .help-step { font-family: 'Caveat', cursive; font-size: 3rem; color: rgba(255,255,255,0.25); display: block; line-height: 1; margin-bottom: 0.5rem; }
+  .help-icon { font-size: 2.5rem; display: block; margin-bottom: 1rem; }
+  .help-card h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: white; margin-bottom: 0.8rem; }
+  .help-card p { font-size: 0.9rem; color: rgba(255,255,255,0.75); line-height: 1.7; }
+
+  .help-cta { text-align: center; margin-top: 3rem; }
+
+  .btn-white {
+    background: white;
+    color: var(--sage);
+    padding: 0.9rem 2.4rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-family: 'Lora', serif;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    display: inline-block;
+  }
+
+  .btn-white:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(0,0,0,0.2); }
+
+  /* FOOTER */
+  footer {
+    background: var(--brown-dark);
+    color: var(--cream);
+    padding: 3rem;
+    text-align: center;
+  }
+
+  .footer-logo { font-family: 'Caveat', cursive; font-size: 2rem; color: var(--terracotta-light); margin-bottom: 0.5rem; }
+  .footer-tagline { font-family: 'Lora', serif; font-style: italic; color: rgba(253,246,236,0.5); font-size: 0.95rem; margin-bottom: 2rem; }
+  .footer-links { display: flex; gap: 2rem; justify-content: center; list-style: none; margin-bottom: 2rem; flex-wrap: wrap; }
+  .footer-links a { color: rgba(253,246,236,0.6); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--terracotta-light); }
+  .footer-credit { font-size: 0.8rem; color: rgba(253,246,236,0.3); }
+
+  @media (max-width: 1000px) {
     .map-layout { grid-template-columns: 1fr; }
-    body { padding: 2rem 1.5rem; }
+    .instagram-grid { grid-template-columns: repeat(4, 1fr); }
+    .insta-post:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+    .items-grid { grid-template-columns: repeat(2, 1fr); }
+    .about { grid-template-columns: 1fr; gap: 3rem; padding: 4rem 1.5rem; }
+    .help-grid { grid-template-columns: 1fr; }
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { padding: 5rem 1.5rem 3rem; }
+    .map-section, .instagram-section, .help-section { padding: 4rem 1.5rem; }
+    .items-section { padding: 5rem 1.5rem; }
+    .stats-bar { gap: 2rem; padding: 1.5rem; }
+  }
+
+  @media (max-width: 600px) {
+    .instagram-grid { grid-template-columns: repeat(3, 1fr); }
+    .insta-post:nth-child(1) { grid-column: span 1; grid-row: span 1; }
+    .items-grid { grid-template-columns: 1fr 1fr; }
   }
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
-<div class="map-header">
-  <span class="section-eyebrow">where hope travels</span>
-  <h2>Where Our Items Go</h2>
-  <p>Pinned locations update as we reach new hospitals and orphanages around the world</p>
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Love <span>&</span> Loops</div>
+  <ul class="nav-links">
+    <li><a href="#about">Our Story</a></li>
+    <li><a href="#items">What We Make</a></li>
+    <li><a href="#instagram">Gallery</a></li>
+    <li><a href="#help" class="nav-cta">Donate Items</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <svg class="hero-bg-yarn" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="200" cy="200" r="180" stroke="#c4704a" stroke-width="3"/>
+    <circle cx="200" cy="200" r="140" stroke="#c4704a" stroke-width="2"/>
+    <circle cx="200" cy="200" r="100" stroke="#c4704a" stroke-width="2"/>
+    <circle cx="200" cy="200" r="60" stroke="#c4704a" stroke-width="2"/>
+    <path d="M80 200 Q150 100 200 200 Q250 300 320 200" stroke="#7a9e7e" stroke-width="2.5" fill="none"/>
+    <path d="M60 160 Q140 80 200 160 Q260 240 340 160" stroke="#d4a843" stroke-width="2" fill="none" opacity="0.7"/>
+    <path d="M100 250 Q170 150 220 250 Q270 350 350 250" stroke="#d4a0a0" stroke-width="2" fill="none" opacity="0.5"/>
+    <circle cx="200" cy="200" r="25" fill="#c4704a" opacity="0.4"/>
+  </svg>
+  <div class="hero-content">
+    <p class="hero-eyebrow">✦ Founded by Alaya, age 16 ✦</p>
+    <h1>Handmade <em>love</em>,<br>delivered worldwide</h1>
+    <p class="hero-tagline">handmade hope, loop by loop</p>
+    <p>Love and Loops delivers handmade crocheted and knitted blankets, hats, toys, and bags to children in hospitals and orphanages — starting in Sri Lanka, spreading to the world.</p>
+    <div class="hero-buttons">
+      <a href="#help" class="btn-primary">Donate Handmade Items</a>
+      <a href="#about" class="btn-secondary">Our Story</a>
+    </div>
+  </div>
+  <div class="hero-squiggle"></div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <span class="stat-number" id="counter1">0</span>
+    <span class="stat-label">Items Donated</span>
+  </div>
+  <div class="stat-divider"></div>
+  <div class="stat-item">
+    <span class="stat-number" id="counter2">0</span>
+    <span class="stat-label">Children Reached</span>
+  </div>
+  <div class="stat-divider"></div>
+  <div class="stat-item">
+    <span class="stat-number" id="counter3">0</span>
+    <span class="stat-label">Locations</span>
+  </div>
+  <div class="stat-divider"></div>
+  <div class="stat-item">
+    <span class="stat-number" id="counter4">0</span>
+    <span class="stat-label">Volunteer Makers</span>
+  </div>
 </div>
 
-<!-- MAP + PANEL -->
-<div class="map-layout">
+<!-- ABOUT -->
+<section class="about" id="about">
+  <span class="about-eyebrow">✦ our story ✦</span>
+  <h2>A trip that changed <em>everything</em></h2>
+  <p>Last year, my family visited Sri Lanka — and I came home a different person. Seeing the children there lit something up in me. I'd been crocheting and knitting for years, and suddenly I knew exactly what all those loops were for: spreading love to kids who needed to feel it most.</p>
+  <p>I'm so excited to start right there in Sri Lanka, and to do it alongside my cousins Aura and Taytay, who feel the same way I do about putting smiles on children's faces. Together we've been connecting with hospitals and orphanages across Sri Lanka, delivering crocheted and knitted items made by friends, family, and volunteers from around the world.</p>
+  <p>Every single item is handmade with care, tagged with love, and placed in the hands of a child who deserves to feel seen and cherished. That's what Love and Loops is — one loop at a time.</p>
+  <div class="about-btn-wrap">
+    <a href="#help" class="btn-primary">Join Our Circle of Makers</a>
+  </div>
+</section>
 
-  <!-- GOOGLE MAP -->
-  <div class="map-wrap">
-    <!-- Overlay label -->
-    <div class="map-label">
-      <div class="map-dot"></div>
-      1 active location · Sri Lanka
+<!-- ITEMS -->
+<section class="items-section" id="items">
+  <div class="items-inner">
+    <div class="section-header">
+      <span class="section-eyebrow" style="color:var(--sage-light)">made with love</span>
+      <h2 style="color:var(--cream)">What We Make &amp; Send</h2>
+    </div>
+    <div class="items-grid">
+      <div class="item-card">
+        <span class="item-emoji">🛏️</span>
+        <p class="item-name">Blankets</p>
+        <p class="item-desc">Crocheted and knitted in soft, warm yarns. Perfect for tiny hands to hold onto.</p>
+        <span class="item-tag">Most Needed</span>
+      </div>
+      <div class="item-card">
+        <span class="item-emoji">🧢</span>
+        <p class="item-name">Hats</p>
+        <p class="item-desc">Cozy beanies and bonnets for newborns to toddlers. Especially needed in highland regions.</p>
+        <span class="item-tag">All Ages</span>
+      </div>
+      <div class="item-card">
+        <span class="item-emoji">🧸</span>
+        <p class="item-name">Toys</p>
+        <p class="item-desc">Amigurumi animals and stuffed companions. A friend to hold in a hospital bed or crib.</p>
+        <span class="item-tag">Children's Favourite</span>
+      </div>
+      <div class="item-card">
+        <span class="item-emoji">👜</span>
+        <p class="item-name">Bags</p>
+        <p class="item-desc">Small tote bags for children's belongings — a sense of ownership and dignity.</p>
+        <span class="item-tag">Practical &amp; Loved</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- INSTAGRAM GALLERY -->
+<section class="instagram-section" id="instagram">
+  <div class="instagram-inner">
+    <div class="instagram-header">
+      <div class="instagram-title-group">
+        <span class="section-eyebrow">from our community</span>
+        <h2>
+          <svg class="insta-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          @projectloveandloops
+        </h2>
+      </div>
+      <a href="https://instagram.com/projectloveandloops" target="_blank" class="instagram-handle-link">
+        <svg class="insta-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        Follow @projectloveandloops
+      </a>
     </div>
 
-    <!--
-      LIVE SITE NOTE:
-      Replace the src below with your own Google Maps Embed URL.
-      Steps:
-        1. Go to maps.google.com
-        2. Search "Sri Lanka"
-        3. Click Share → Embed a map
-        4. Copy the iframe src URL and paste it here
-
-      The URL below is a working public embed showing the world
-      centered on Sri Lanka with a pin — no API key needed.
+    <!-- 
+      BEHOLD INSTAGRAM FEED
+      Steps to connect your real Instagram:
+      1. Go to behold.so and sign up free
+      2. Connect @projectloveandloops
+      3. Copy your unique Feed ID (looks like: abc123)
+      4. Replace YOUR_FEED_ID_HERE below with your actual Feed ID
+      5. Save and upload to GitHub — done!
     -->
-    <iframe
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4049702.6952555596!2d78.48808!3d7.873054!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae2593cf65a1e9d%3A0xe13da4b400e2d38c!2sSri%20Lanka!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
-      allowfullscreen=""
-      loading="lazy"
-      referrerpolicy="no-referrer-when-downgrade">
-    </iframe>
+    <div id="behold-widget-holder">
+      <script src="https://w.behold.so/widget.js" type="module"></script>
+      <behold-widget feed-id="YOUR_FEED_ID_HERE"></behold-widget>
+    </div>
 
-    <!-- Legend -->
-    <div class="map-legend">
-      <div class="legend-item">
-        <div class="legend-dot" style="background:#c4704a;"></div>
-        Active delivery location
+    <p class="instagram-note">✦ Follow us on Instagram <a href="https://instagram.com/projectloveandloops" target="_blank" style="color:var(--terracotta);">@projectloveandloops</a> for the latest updates ✦</p>
+  </div>
+</section>
+
+<!-- HOW TO HELP -->
+<section class="help-section" id="help">
+  <div class="help-inner">
+    <div class="section-header">
+      <span class="section-eyebrow">get involved</span>
+      <h2>Join Our Circle of Makers</h2>
+    </div>
+    <div class="help-grid">
+      <div class="help-card">
+        <span class="help-step">01</span>
+        <span class="help-icon">🧶</span>
+        <h3>Grab Your Yarn</h3>
+        <p>Download our pattern guide and item guidelines. No need to be an expert — all skill levels welcome, from beginners to seasoned crocheters.</p>
       </div>
-      <div class="legend-item">
-        <div class="legend-dot" style="background:#d4a843; opacity:0.6;"></div>
-        Coming soon
+      <div class="help-card">
+        <span class="help-step">02</span>
+        <span class="help-icon">💛</span>
+        <h3>Make With Love</h3>
+        <p>Craft a blanket, hat, toy, or bag. Each item is tagged with a little note — so the child knows it was made just for them.</p>
       </div>
+      <div class="help-card">
+        <span class="help-step">03</span>
+        <span class="help-icon">📦</span>
+        <h3>Send It Our Way</h3>
+        <p>Mail your finished items to our collection address. We handle sorting, packaging, and delivery — your job is just the love part.</p>
+      </div>
+    </div>
+    <div class="help-cta">
+      <a href="patterns.html" class="btn-white">Get Our Pattern Guide →</a>
     </div>
   </div>
+</section>
 
-  <!-- NEEDS PANEL -->
-  <div class="needs-panel">
-    <h3>Current Shelter Needs</h3>
-    <p class="needs-sub">Updated as shelters share their requests</p>
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Love &amp; Loops</div>
+  <p class="footer-tagline">handmade hope, loop by loop</p>
+  <ul class="footer-links">
+    <li><a href="#about">Our Story</a></li>
+    <li><a href="#items">What We Make</a></li>
+    <li><a href="#instagram">Gallery</a></li>
+    <li><a href="#help">Get Involved</a></li>
+    <li><a href="/cdn-cgi/l/email-protection#4a222f2626250a26253c2f2b242e2625253a396425382d">Contact</a></li>
+  </ul>
+  <p class="footer-credit">Founded with ❤️ by Alaya · loveandloops.org · Every loop counts</p>
+</footer>
 
-    <div class="needs-card">
-      <div class="needs-location">📍 Colombo Children's Hospital</div>
-      <div class="needs-type">Hospital · Western Province, Sri Lanka</div>
-      <div class="needs-items">
-        <span class="need-tag urgent-tag">🚨 Blankets</span>
-        <span class="need-tag">Hats — newborn</span>
-        <span class="need-tag">Toys</span>
-      </div>
-    </div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // Animated counters
+  function animateCounter(el, target) {
+    let start = 0;
+    const step = target / (2000 / 16);
+    const timer = setInterval(() => {
+      start += step;
+      if (start >= target) {
+        el.textContent = target;
+        clearInterval(timer);
+      } else {
+        el.textContent = Math.floor(start);
+      }
+    }, 16);
+  }
 
-    <div class="needs-card">
-      <div class="needs-location">📍 Jaffna Children's Home</div>
-      <div class="needs-type">Orphanage · Northern Province, Sri Lanka</div>
-      <div class="needs-items">
-        <span class="need-tag">Blankets — toddler</span>
-        <span class="need-tag urgent-tag">🚨 Warm hats</span>
-        <span class="need-tag">Bags</span>
-      </div>
-    </div>
+  const statsBar = document.querySelector('.stats-bar');
+  let animated = false;
+  new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting && !animated) {
+      animated = true;
+      animateCounter(document.getElementById('counter1'), 218);
+      animateCounter(document.getElementById('counter2'), 312);
+      animateCounter(document.getElementById('counter3'), 3);
+      animateCounter(document.getElementById('counter4'), 27);
+    }
+  }, { threshold: 0.5 }).observe(statsBar);
 
-    <div class="needs-card">
-      <div class="needs-location">📍 Kandy Orphanage Village</div>
-      <div class="needs-type">Orphanage · Central Province, Sri Lanka</div>
-      <div class="needs-items">
-        <span class="need-tag">Toys — amigurumi</span>
-        <span class="need-tag">Blankets</span>
-        <span class="need-tag urgent-tag">🚨 Bags</span>
-      </div>
-    </div>
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  });
 
-    <a href="#" class="btn-primary">Make Items for These Shelters</a>
-  </div>
-</div>
-
-<!-- NOTE -->
-<div class="note-box">
-  💡 <strong>How to set this up on the live site:</strong> Go to Google Maps, search "Sri Lanka", click Share → Embed a map, copy the iframe link, and paste it into your index.html to replace the current map. No account or API key needed — completely free!
-</div>
-
-</body>
-</html>
+  // Make instagram posts link to instagram
+  document.qu
