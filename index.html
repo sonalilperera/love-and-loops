@@ -298,8 +298,6 @@
     gap: 5rem;
     align-items: center;
   }
-    
-  }
 
   .about-card {
     background: var(--warm-white);
@@ -737,14 +735,14 @@
     100% { r: 22; opacity: 0; }
   }
 
-  @media (max-width: 700px) {
+  @media (max-width: 1000px) {
     .map-layout { grid-template-columns: 1fr; }
     .instagram-grid { grid-template-columns: repeat(4, 1fr); }
     .insta-post:nth-child(1) { grid-column: span 2; grid-row: span 2; }
     .items-grid { grid-template-columns: repeat(2, 1fr); }
-    .about { grid-template-columns: 1fr 1fr; gap: 3rem; padding: 4rem 1.5rem; }
+    .about { grid-template-columns: 1fr; gap: 3rem; padding: 4rem 1.5rem; }
     .help-grid { grid-template-columns: 1fr; }
-    .nav { padding: 1rem 1.5rem; }
+    nav { padding: 1rem 1.5rem; }
     .nav-links { display: none; }
     .hero { padding: 5rem 1.5rem 3rem; }
     .map-section, .instagram-section, .help-section { padding: 4rem 1.5rem; }
@@ -789,7 +787,7 @@
     <p class="hero-eyebrow">✦ Founded by Alaya, age 16 ✦</p>
     <h1>Handmade <em>love</em>,<br>delivered worldwide</h1>
     <p class="hero-tagline">handmade hope, loop by loop</p>
-    <p>Love & Loops delivers handmade crocheted and knitted blankets, hats, toys, and bags to children in hospitals and orphanages, starting in Sri Lanka, spreading to the world.</p>
+    <p>Love and Loops delivers handmade crocheted and knitted blankets, hats, toys, and bags to children in hospitals and orphanages — starting in Sri Lanka, spreading to the world.</p>
     <div class="hero-buttons">
       <a href="#help" class="btn-primary">Donate Handmade Items</a>
       <a href="#about" class="btn-secondary">Our Story</a>
@@ -798,6 +796,23 @@
   <div class="hero-squiggle"></div>
 </section>
 
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span class="ticker-item">47 blankets donated this month</span>
+    <span class="ticker-item">New delivery: Colombo Children's Hospital, Sri Lanka</span>
+    <span class="ticker-item">23 hats sent to Jaffna Orphanage</span>
+    <span class="ticker-item">Urgent need: warm blankets, Kandy region</span>
+    <span class="ticker-item">12 volunteers crafting this week</span>
+    <span class="ticker-item">218 items delivered since launch</span>
+    <span class="ticker-item">47 blankets donated this month</span>
+    <span class="ticker-item">New delivery: Colombo Children's Hospital, Sri Lanka</span>
+    <span class="ticker-item">23 hats sent to Jaffna Orphanage</span>
+    <span class="ticker-item">Urgent need: warm blankets, Kandy region</span>
+    <span class="ticker-item">12 volunteers crafting this week</span>
+    <span class="ticker-item">218 items delivered since launch</span>
+  </div>
+</div>
 
 <!-- STATS -->
 <div class="stats-bar">
