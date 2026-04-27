@@ -8,18 +8,18 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,500;1,400&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --cream: #fdf6ec;
-    --warm-white: #fffbf4;
-    --terracotta: #c4704a;
-    --terracotta-light: #e8916d;
-    --sage: #7a9e7e;
-    --sage-light: #a8c5ac;
-    --dusty-rose: #d4a0a0;
-    --golden: #d4a843;
-    --brown-dark: #3d2c1e;
-    --brown-mid: #6b4c35;
-    --text: #2e1f12;
-    --text-light: #7a5c3e;
+    --cream: #FFF8F3;
+    --warm-white: #FFF3EC;
+    --coral: #E8735A;
+    --coral-light: #F0957A;
+    --amber: #D4A043;
+    --amber-light: #E8C070;
+    --blush: #EDADA0;
+    --peach: #F0A87A;
+    --brown-dark: #4A2E22;
+    --brown-mid: #7A4A35;
+    --text: #3A1F12;
+    --text-light: #8A5C3E;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -52,18 +52,18 @@
     padding: 1.2rem 3rem;
     background: rgba(253,246,236,0.92);
     backdrop-filter: blur(8px);
-    border-bottom: 1.5px solid #e8d5c0;
+    border-bottom: 1.5px solid #F5D5C8;
   }
 
   .nav-logo {
     font-family: 'Caveat', cursive;
     font-size: 1.7rem;
     font-weight: 700;
-    color: var(--terracotta);
+    color: var(--coral);
     letter-spacing: 0.02em;
   }
 
-  .nav-logo span { color: var(--sage); }
+  .nav-logo span { color: #D4A043; }
 
   .nav-links {
     display: flex;
@@ -80,17 +80,17 @@
     transition: color 0.2s;
   }
 
-  .nav-links a:hover { color: var(--terracotta); }
+  .nav-links a:hover { color: var(--coral); }
 
   .nav-cta {
-    background: var(--terracotta);
+    background: var(--coral);
     color: white !important;
     padding: 0.55rem 1.4rem;
     border-radius: 50px;
     transition: background 0.2s !important;
   }
 
-  .nav-cta:hover { background: var(--terracotta-light) !important; }
+  .nav-cta:hover { background: var(--coral-light) !important; }
 
   /* HERO */
   .hero {
@@ -135,7 +135,7 @@
   .hero-eyebrow {
     font-family: 'Caveat', cursive;
     font-size: 1.2rem;
-    color: var(--sage);
+    color: var(--peach);
     letter-spacing: 0.08em;
     margin-bottom: 0.8rem;
     animation: fadeUp 1s 0.1s ease both;
@@ -150,7 +150,7 @@
     animation: fadeUp 1s 0.2s ease both;
   }
 
-  .hero h1 em { font-style: italic; color: var(--terracotta); }
+  .hero h1 em { font-style: italic; color: var(--coral); }
 
   .hero-tagline {
     font-family: 'Caveat', cursive;
@@ -177,7 +177,7 @@
   }
 
   .btn-primary {
-    background: var(--terracotta);
+    background: var(--coral);
     color: white;
     padding: 0.85rem 2rem;
     border-radius: 50px;
@@ -186,31 +186,31 @@
     font-size: 0.95rem;
     letter-spacing: 0.03em;
     transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
-    box-shadow: 0 4px 20px rgba(196,112,74,0.3);
+    box-shadow: 0 4px 20px rgba(232,115,90,0.3);
     display: inline-block;
   }
 
   .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 28px rgba(196,112,74,0.4);
-    background: var(--terracotta-light);
+    box-shadow: 0 8px 28px rgba(232,115,90,0.4);
+    background: var(--coral-light);
   }
 
   .btn-secondary {
     background: transparent;
-    color: var(--sage);
+    color: #D4A043;
     padding: 0.85rem 2rem;
     border-radius: 50px;
     text-decoration: none;
     font-family: 'Lora', serif;
     font-size: 0.95rem;
-    border: 2px solid var(--sage);
+    border: 2px solid #D4A043;
     transition: transform 0.2s, background 0.2s, color 0.2s;
     display: inline-block;
   }
 
   .btn-secondary:hover {
-    background: var(--sage);
+    background: #D4A043;
     color: white;
     transform: translateY(-2px);
   }
@@ -243,7 +243,7 @@
   .stat-number {
     font-family: 'Playfair Display', serif;
     font-size: 2.4rem;
-    color: var(--golden);
+    color: var(--peach);
     display: block;
     line-height: 1;
   }
@@ -251,7 +251,7 @@
   .stat-label {
     font-family: 'Caveat', cursive;
     font-size: 1rem;
-    color: var(--sage-light);
+    color: #E8C070;
     letter-spacing: 0.06em;
     margin-top: 0.3rem;
   }
@@ -272,7 +272,7 @@
   .about-eyebrow {
     font-family: 'Caveat', cursive;
     font-size: 1.1rem;
-    color: var(--terracotta);
+    color: var(--coral);
     letter-spacing: 0.1em;
     display: block;
     margin-bottom: 0.8rem;
@@ -286,7 +286,7 @@
     margin-bottom: 2rem;
   }
 
-  .about h2 em { font-style: italic; color: var(--terracotta); }
+  .about h2 em { font-style: italic; color: var(--coral); }
 
   .about p {
     font-size: 1.05rem;
@@ -303,7 +303,7 @@
 
   /* ITEMS */
   .items-section {
-    background: var(--brown-dark);
+    background: linear-gradient(160deg, #E8735A 0%, #F0A87A 100%);
     padding: 6rem 3rem;
     position: relative;
     overflow: hidden;
@@ -357,16 +357,16 @@
   .item-emoji { font-size: 3rem; display: block; margin-bottom: 1rem; }
   .item-name { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--cream); margin-bottom: 0.6rem; }
   .item-desc { font-size: 0.88rem; color: rgba(253,246,236,0.6); line-height: 1.7; }
-  .item-tag { display: inline-block; margin-top: 1rem; background: rgba(196,112,74,0.3); color: var(--terracotta-light); font-family: 'Caveat', cursive; font-size: 0.85rem; padding: 0.25rem 0.8rem; border-radius: 20px; }
+  .item-tag { display: inline-block; margin-top: 1rem; background: rgba(255,255,255,0.2); color: white; font-family: 'Caveat', cursive; font-size: 0.85rem; padding: 0.25rem 0.8rem; border-radius: 20px; }
 
-  .urgent-tag { background: rgba(196,112,74,0.12); border-color: var(--terracotta); color: var(--terracotta); }
+  .urgent-tag { background: rgba(232,115,90,0.12); border-color: var(--coral); color: var(--coral); }
 
   /* INSTAGRAM SECTION */
   .instagram-section {
     padding: 5rem 3rem;
     background: var(--warm-white);
-    border-top: 2px solid #e8d5c0;
-    border-bottom: 2px solid #e8d5c0;
+    border-top: 2px solid #F5D5C8;
+    border-bottom: 2px solid #F5D5C8;
   }
 
   .instagram-inner { max-width: 1200px; margin: 0 auto; }
@@ -382,7 +382,7 @@
 
   .instagram-title-group {}
 
-  .instagram-title-group .section-eyebrow { color: var(--terracotta); text-align: left; }
+  .instagram-title-group .section-eyebrow { color: var(--coral); text-align: left; }
 
   .instagram-title-group h2 {
     font-family: 'Playfair Display', serif;
@@ -502,7 +502,7 @@
 
   /* HOW TO HELP */
   .help-section {
-    background: linear-gradient(135deg, var(--sage) 0%, #5d8c61 100%);
+    background: linear-gradient(135deg, #D4A043 0%, #B8862E 100%);
     padding: 6rem 3rem;
     position: relative;
     overflow: hidden;
@@ -553,7 +553,7 @@
 
   .btn-white {
     background: white;
-    color: var(--sage);
+    color: #D4A043;
     padding: 0.9rem 2.4rem;
     border-radius: 50px;
     text-decoration: none;
@@ -575,11 +575,11 @@
     text-align: center;
   }
 
-  .footer-logo { font-family: 'Caveat', cursive; font-size: 2rem; color: var(--terracotta-light); margin-bottom: 0.5rem; }
+  .footer-logo { font-family: 'Caveat', cursive; font-size: 2rem; color: var(--coral-light); margin-bottom: 0.5rem; }
   .footer-tagline { font-family: 'Lora', serif; font-style: italic; color: rgba(253,246,236,0.5); font-size: 0.95rem; margin-bottom: 2rem; }
   .footer-links { display: flex; gap: 2rem; justify-content: center; list-style: none; margin-bottom: 2rem; flex-wrap: wrap; }
   .footer-links a { color: rgba(253,246,236,0.6); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
-  .footer-links a:hover { color: var(--terracotta-light); }
+  .footer-links a:hover { color: var(--peach); }
   .footer-credit { font-size: 0.8rem; color: rgba(253,246,236,0.3); }
 
   @media (max-width: 1000px) {
@@ -608,7 +608,7 @@
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">Love <span>&</span> Loops</div>
+  <a href="#" style="display:flex;align-items:center;"><img src="logo.png" alt="Love and Loops" style="height:52px;width:auto;"></a>
   <ul class="nav-links">
     <li><a href="#about">Our Story</a></li>
     <li><a href="#items">What We Make</a></li>
@@ -620,14 +620,14 @@
 <!-- HERO -->
 <section class="hero">
   <svg class="hero-bg-yarn" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="200" cy="200" r="180" stroke="#c4704a" stroke-width="3"/>
-    <circle cx="200" cy="200" r="140" stroke="#c4704a" stroke-width="2"/>
-    <circle cx="200" cy="200" r="100" stroke="#c4704a" stroke-width="2"/>
-    <circle cx="200" cy="200" r="60" stroke="#c4704a" stroke-width="2"/>
-    <path d="M80 200 Q150 100 200 200 Q250 300 320 200" stroke="#7a9e7e" stroke-width="2.5" fill="none"/>
-    <path d="M60 160 Q140 80 200 160 Q260 240 340 160" stroke="#d4a843" stroke-width="2" fill="none" opacity="0.7"/>
+    <circle cx="200" cy="200" r="180" stroke="var(--coral)" stroke-width="3"/>
+    <circle cx="200" cy="200" r="140" stroke="var(--coral)" stroke-width="2"/>
+    <circle cx="200" cy="200" r="100" stroke="var(--coral)" stroke-width="2"/>
+    <circle cx="200" cy="200" r="60" stroke="var(--coral)" stroke-width="2"/>
+    <path d="M80 200 Q150 100 200 200 Q250 300 320 200" stroke="#D4A043" stroke-width="2.5" fill="none"/>
+    <path d="M60 160 Q140 80 200 160 Q260 240 340 160" stroke="var(--peach)" stroke-width="2" fill="none" opacity="0.7"/>
     <path d="M100 250 Q170 150 220 250 Q270 350 350 250" stroke="#d4a0a0" stroke-width="2" fill="none" opacity="0.5"/>
-    <circle cx="200" cy="200" r="25" fill="#c4704a" opacity="0.4"/>
+    <circle cx="200" cy="200" r="25" fill="var(--coral)" opacity="0.4"/>
   </svg>
   <div class="hero-content">
     <p class="hero-eyebrow">✦ Founded by Alaya, age 16 ✦</p>
@@ -681,7 +681,7 @@
 <section class="items-section" id="items">
   <div class="items-inner">
     <div class="section-header">
-      <span class="section-eyebrow" style="color:var(--sage-light)">made with love</span>
+      <span class="section-eyebrow" style="color:#E8C070">made with love</span>
       <h2 style="color:var(--cream)">What We Make &amp; Send</h2>
     </div>
     <div class="items-grid">
@@ -752,7 +752,7 @@
   <div class="instagram-inner">
 
     <div style="text-align:center; margin-bottom:2rem; position:relative; z-index:1;">
-      <span style="font-family:'Caveat',cursive; font-size:1.1rem; color:var(--terracotta); letter-spacing:0.1em; display:block; margin-bottom:0.5rem;">stay connected</span>
+      <span style="font-family:'Caveat',cursive; font-size:1.1rem; color:var(--coral); letter-spacing:0.1em; display:block; margin-bottom:0.5rem;">stay connected</span>
       <h2 style="font-family:'Playfair Display',serif; font-size:2.4rem; color:var(--brown-dark); margin-bottom:1rem;">Follow Us on Social 🧶</h2>
       <a href="https://instagram.com/projectloveandloops" target="_blank" style="display:inline-flex; align-items:center; gap:0.6rem; background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); color:white; padding:0.7rem 1.6rem; border-radius:50px; text-decoration:none; font-family:'Caveat',cursive; font-size:1.1rem; box-shadow:0 4px 16px rgba(220,39,67,0.3);">
         @projectloveandloops
@@ -769,7 +769,7 @@
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo">Love &amp; Loops</div>
+  <div style="margin-bottom:0.8rem;"><img src="logo.png" alt="Love and Loops" style="height:60px;width:auto;filter:brightness(0) invert(1);opacity:0.85;"></div>
   <p class="footer-tagline">handmade hope, loop by loop</p>
   <ul class="footer-links">
     <li><a href="#about">Our Story</a></li>
