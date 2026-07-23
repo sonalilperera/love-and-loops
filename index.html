@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="stylesheet" href="gallery.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Love and Loops — Handmade Hope, Loop by Loop</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -743,23 +744,16 @@
   </div>
 </section>
 
-<!-- INSTAGRAM GALLERY -->
+<!-- PHOTO GALLERY -->
 <section class="instagram-section" id="instagram">
   <div class="instagram-inner">
-
-    <div style="text-align:center; margin-bottom:2rem; position:relative; z-index:1;">
-      <span style="font-family:'Caveat',cursive; font-size:1.8rem; color:var(--coral); letter-spacing:0.1em; display:block; margin-bottom:0.5rem;">stay connected</span>
-      <h2 style="font-family:'Playfair Display',serif; font-size:2.4rem; color:var(--brown-dark); margin-bottom:1rem;">Follow Us on Social 🧶</h2>
-      <a href="https://instagram.com/projectloveandloops" target="_blank" style="display:inline-flex; align-items:center; gap:0.6rem; background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); color:white; padding:0.7rem 1.6rem; border-radius:50px; text-decoration:none; font-family:'Caveat',cursive; font-size:1.1rem; box-shadow:0 4px 16px rgba(220,39,67,0.3);">
-        @projectloveandloops
-      </a>
+    <div class="instagram-header">
+      <div class="instagram-title-group">
+        <p class="section-eyebrow">Gallery</p>
+        <h2>Our Journey</h2>
+      </div>
     </div>
-
-    <div id="behold-widget-holder">
-      <script src="https://w.behold.so/widget.js" type="module"></script>
-      <behold-widget feed-id="sgiXPuezXMnbgt91PSPh"></behold-widget>
-    </div>
-
+    <div class="ll-gallery-grid" id="ll-gallery-grid"></div>
   </div>
 </section>
 
@@ -815,3 +809,7 @@
 
   // Make instagram posts link to instagram
   document.qu
+
+
+</script>
+<script src="gallery.js"></script>
