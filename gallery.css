@@ -1,0 +1,135 @@
+/* ===== Love & Loops Photo Gallery ===== */
+
+.ll-gallery-section {
+  padding: 4rem 1.5rem;
+  background-color: #FDF8F2; /* cream */
+  text-align: center;
+}
+
+.ll-gallery-section h2 {
+  font-family: 'Playfair Display', serif;
+  color: #C1673B; /* terracotta */
+  font-size: 2.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.ll-gallery-section .ll-gallery-subtitle {
+  font-family: 'Caveat', cursive;
+  font-size: 1.5rem;
+  color: #7A8B69; /* sage green */
+  margin-bottom: 2.5rem;
+}
+
+.ll-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.ll-gallery-card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.ll-gallery-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.14);
+}
+
+.ll-gallery-card img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  display: block;
+}
+
+.ll-gallery-caption {
+  padding: 1rem 1.1rem 1.2rem;
+  text-align: left;
+}
+
+.ll-gallery-caption p {
+  font-family: 'Lora', serif;
+  color: #4A4238;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  margin: 0 0 0.35rem;
+}
+
+.ll-gallery-date {
+  font-family: 'Lora', serif;
+  font-size: 0.78rem;
+  color: #E8A830; /* honey amber */
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.ll-gallery-empty {
+  font-family: 'Lora', serif;
+  color: #999;
+  font-style: italic;
+}
+
+/* Lightbox */
+.ll-lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(30, 24, 18, 0.88);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 2rem;
+}
+
+.ll-lightbox.ll-active {
+  display: flex;
+}
+
+.ll-lightbox-content {
+  max-width: 700px;
+  width: 100%;
+  background: #FDF8F2;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.ll-lightbox-content img {
+  width: 100%;
+  max-height: 70vh;
+  object-fit: contain;
+  background: #000;
+  display: block;
+}
+
+.ll-lightbox-caption {
+  padding: 1.25rem 1.5rem;
+  font-family: 'Lora', serif;
+  color: #4A4238;
+}
+
+.ll-lightbox-close {
+  position: absolute;
+  top: 1.5rem;
+  right: 2rem;
+  color: #fff;
+  font-size: 2rem;
+  cursor: pointer;
+  line-height: 1;
+  font-family: sans-serif;
+}
+
+@media (max-width: 480px) {
+  .ll-gallery-section h2 {
+    font-size: 1.75rem;
+  }
+  .ll-gallery-card img {
+    height: 200px;
+  }
+}
